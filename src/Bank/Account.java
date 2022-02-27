@@ -1,13 +1,14 @@
 package Bank;
 
 public class Account {
-    private String accNum;
+    private int accNum;
     private String name; //var length
     private String password; //fixed length of 10 chars
     private String currencyType;
     private float balance;
 
-    public Account(String name, String password, String currencyType, float balance) {
+    public Account(int accNum, String name, String password, String currencyType, float balance) {
+        this.accNum = accNum;
         this.name = name;
         this.password = password;
         this.currencyType = currencyType;
@@ -15,11 +16,11 @@ public class Account {
     }
 
     //getters and setters
-    public String getAccNum() {
+    public int getAccNum() {
         return accNum;
     }
 
-    public void setAccNum(String accNum) {
+    public void setAccNum(int accNum) {
         this.accNum = accNum;
     }
 
