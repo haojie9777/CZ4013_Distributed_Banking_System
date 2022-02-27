@@ -1,7 +1,7 @@
 package Bank;
 import java.util.HashMap;
 
-//handles adding and deleting of accounts
+//controller class for accounts
 public class AccountManager {
     //stores list of accounts created in this runtime
     private HashMap<Integer, Account> accountsHashMap = new HashMap<Integer, Account>();
@@ -50,6 +50,42 @@ public class AccountManager {
 
     public HashMap<Integer, Account> getAccounts(){
         return accountsHashMap;
+    }
+
+    public float depositAccount(String name, int accountNumber, String password, String currencyType, float amount){
+        Account account = accountsHashMap.get(accountNumber);
+        if (account == null){
+            return -1;
+        }
+        else{
+            if (name == account.getName() && password == account.getPassword()){
+                account.setBalance(account.getBalance() + amount);
+                accountsHashMap.put(accountNumber, account);
+                return account.getBalance();
+            }
+            else{
+                return -2;
+            }
+        }
+    }
+    public float withdrawAccount(String name, int accountNumber, String password, String currencyType, float amount){
+        Account account = accountsHashMap.get(accountNumber);
+        if (account == null){
+            return -1;
+        }
+        else{
+            if (name == account.getName() && password == account.getPassword()){
+                account.setBalance(account.getBalance() - amount);
+                if (account.getBalance() < 0){
+                    return -3;
+                }
+                accountsHashMap.put(accountNumber, account);
+                return account.getBalance();
+            }
+            else{
+                return -2;
+            }
+        }
     }
 
 
