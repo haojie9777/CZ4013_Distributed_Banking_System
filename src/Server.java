@@ -6,7 +6,7 @@ import java.util.HashMap;
 public class Server {
 
     public static void main(String[] args) throws IOException {
-        DatagramSocket aSocket = new DatagramSocket(1234);
+        DatagramSocket aSocket = new DatagramSocket(6789);
         byte[] receivedBuffer = new byte[65535];
 
         DatagramPacket request = null;
@@ -14,6 +14,7 @@ public class Server {
             //receive new request from clients
             request = new DatagramPacket(receivedBuffer,receivedBuffer.length );
             aSocket.receive(request); //blocked here if no request
+            System.out.println(new String(request.toString()));
 
             //handle request
             DatagramPacket reply = new DatagramPacket(request.getData(), request.getLength(), request.getAddress(), request.getPort());
