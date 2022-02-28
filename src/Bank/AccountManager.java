@@ -30,19 +30,19 @@ public class AccountManager {
         return newAccountNum;
     }
     //close existing account
-    public String closeAccount(String name, int accountNumber, String password){
+    public int closeAccount(String name, int accountNumber, String password){
         Account account = accountsHashMap.get(accountNumber);
         if (account == null)
         {
-            return "Error: account number does not exist";
+            return -1;
         }
         else{
             if (name == account.getName() && password == account.getPassword()){
                 accountsHashMap.remove(accountNumber);
-                return "Success: account successful closed";
+                return 1;
             }
             else{
-                return "Error: Wrong name or password specified";
+                return -2;
             }
         }
 
@@ -52,7 +52,7 @@ public class AccountManager {
         return accountsHashMap;
     }
 
-    public float depositAccount(String name, int accountNumber, String password, String currencyType, float amount){
+    public float depositAccount(int accountNumber, String name, String password, String currencyType, float amount){
         Account account = accountsHashMap.get(accountNumber);
         if (account == null){
             return -1;
@@ -68,7 +68,7 @@ public class AccountManager {
             }
         }
     }
-    public float withdrawAccount(String name, int accountNumber, String password, String currencyType, float amount){
+    public float withdrawAccount(int accountNumber,String name ,String password, String currencyType, float amount){
         Account account = accountsHashMap.get(accountNumber);
         if (account == null){
             return -1;
@@ -88,6 +88,22 @@ public class AccountManager {
         }
     }
 
+
+    public float getAccountBalance(int accountNumber, String name, String password){
+        Account account = accountsHashMap.get(accountNumber);
+        if (account == null){
+            return -1;
+        }
+        else{
+            if (name == account.getName() && password == account.getPassword()){
+                return account.getBalance();
+            }
+            else{
+                return -2;
+            }
+        }
+
+    }
 
 
 }
