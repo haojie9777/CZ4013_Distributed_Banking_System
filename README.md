@@ -152,8 +152,8 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 | Params                    | Type        |
 | ------------------------- | ----------- |
-| Ack                       | 'int'       |
-| Message (Account Balance) | 'str'       |
+| Ack                       | `int`       |
+| Message (Account Balance) | `str`       |
 
 ## Clients
 
