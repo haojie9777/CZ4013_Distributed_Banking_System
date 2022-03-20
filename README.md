@@ -55,6 +55,7 @@ Invokes server services
 - [x] Close account
 - [x] Deposit
 - [x] Withdraw
+- [ ] Broadcast update to subscribers
 - [x] (Idempotent) Check account balance
 - [ ] (Non-idempotent) Transfer money
 
