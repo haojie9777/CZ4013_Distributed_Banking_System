@@ -35,7 +35,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 | Account Name      | `str`       |
 | Password          | `str`       |
 | Currency          | `str`       |
-| Initial balance   | `int`       |
+| Initial balance   | `float`       |
 
 #### Response
 
@@ -71,7 +71,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 | Account Number | `int`       |
 | Password       | `str`       |
 | Currency       | `str`       |
-| Amount         | `int`       |
+| Amount         | `float`     |
 
 #### Response
 
@@ -90,7 +90,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 | Account Number | `int`       |
 | Password       | `str`       |
 | Currency       | `str`       |
-| Amount         | `int`       |
+| Amount         | `float`     |
 
 #### Response
 
@@ -127,7 +127,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 | Account Number       | `int`       |
 | Password             | `str`       |
 | Currency             | `str`       |
-| Amount               | `int`       |
+| Amount               | `float`     |
 | Payee Account Name   | `str`       |
 | Payee Account Number | `int`       |
 
@@ -135,8 +135,8 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 | Params            | Type        |
 | ----------------- | ----------- |
-| Ack               | 'int'       |
-| Message (Balance) | 'str'       |
+| Ack               | `int`       |
+| Message (Balance) | `str`       |
 
 ### Check Account Balance
 
