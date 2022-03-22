@@ -163,6 +163,8 @@ Invokes server services
 
 ### Server (Java)
 
+server start -> create a handler -> handler class creates accountManager class
+
 #### Server Class
 
 - [ ] Service request
@@ -172,6 +174,7 @@ Invokes server services
 - [ ] At-most-once semantics (specify semantics as argument when starting server)
 - [ ] Simulate loss of request and reply
 - [ ] Fault tolerance
+
 
 #### Bank Class
 
