@@ -26,7 +26,7 @@ project file and folder structure goes here
 
 For now, we use Ack to return '1' for success, '0' for error, then message to return response or error messages 
 
-### Open Account
+### Open Account (request 1)
 
 #### Request
 
@@ -46,7 +46,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 | Status                       | `int`       |
 | Message (Account Number)  | `str`       |
 
-### Close Account
+### Close Account (request 2)
 
 #### Request
 
@@ -65,7 +65,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 | Status         | `int`       |
 | Message     | `str`       |
 
-### Deposit Money
+### Deposit Money (request 3)
 
 #### Request
 
@@ -86,7 +86,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 | Status               | `int`       |
 | Message (Balance) | `str`       |
 
-### Withdraw Money
+### Withdraw Money (request 4)
 
 #### Request
 
@@ -107,7 +107,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 | Status               | `int`       |
 | Message (Balance) | `str`       |
 
-### Broadcast Account Update (TBC)
+### Broadcast Account Update (TBC) (request 4)
 
 #### Request
 
@@ -127,7 +127,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 | Status         | `int`       |
 | Message     | `str`       |
 
-### Transfer Money
+### Transfer Money (request 5)
 
 #### Request
 
@@ -150,7 +150,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 | Status               | `int`       |
 | Message (Balance) | `str`       |
 
-### Check Account Balance
+### Check Account Balance (request 6)
 
 #### Request
 
