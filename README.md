@@ -185,9 +185,9 @@ server start -> create a handler -> handler class creates accountManager class
 
 #### Server Class
 
-- [ ] Service request
-- [ ] Service reply
-- [ ] Marshalling/unmarshalling
+- [x] Service request
+- [x] Service reply
+- [x] Marshalling/unmarshalling
 - [ ] At-least-once semantics (specify semantics as argument when starting server)
 - [ ] At-most-once semantics (specify semantics as argument when starting server)
 - [ ] Simulate loss of request and reply
