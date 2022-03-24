@@ -94,6 +94,10 @@ public class Marshaller {
                 request.put("password", requestParams[4]);
 
                 return request;
+
+            default:
+                System.out.println("Invalid Reuqest");
+                return request;
         }
     }
 }
