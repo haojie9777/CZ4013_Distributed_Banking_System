@@ -100,4 +100,10 @@ public class Marshaller {
                 return request;
         }
     }
+
+    public static byte[] marshall(HashMap<String, Object> replyParams) {
+        byte[] payload = new byte[0];
+        return payload;
+    };
+
 }
