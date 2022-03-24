@@ -1,6 +1,6 @@
 # CZ4013_Distributed_Banking_System
 
-Banking system project for CZ4013 Distributed Systems. Banking system consist of a banking server and several client instances. 
+Banking system project for CZ4013 Distributed Systems. Banking system consist of a banking server and several client instances.
 
 # Getting Started
 
@@ -24,150 +24,150 @@ project file and folder structure goes here
 
 ## Server Services
 
-For now, we use Ack to return '1' for success, '0' for error, then message to return response or error messages 
+For now, we use Ack to return '1' for success, '0' for error, then message to return response or error messages
 
 ### Open Account (request 0)
 
 #### Request
 
-| Params            | Type        |
-| ----------------- | ----------- |
-| uid               | `str`       |
-| Account Name      | `str`       |
-| Password          | `str`       |
-| Currency          | `str`       |
-| Initial balance   | `float`     |
+| Params          | Type    |
+| --------------- | ------- |
+| uid             | `str`   |
+| Account Name    | `str`   |
+| Password        | `str`   |
+| Currency        | `str`   |
+| Initial balance | `float` |
 
 #### Response
 
-| Params                    | Type        |
-| ------------------------- | ----------- |
-| uid                       | `str`       |
-| Status                    | `int`       |
-| Message (Account Number)  | `str`       |
+| Params                   | Type  |
+| ------------------------ | ----- |
+| uid                      | `str` |
+| Status                   | `int` |
+| Message (Account Number) | `str` |
 
 ### Close Account (request 1)
 
 #### Request
 
-| Params         | Type        |
-| -------------- | ----------- |
-| uid            | `str`       |
-| Account Name   | `str`       |
-| Account Number | `int`       |
-| Password       | `str`       |
+| Params         | Type  |
+| -------------- | ----- |
+| uid            | `str` |
+| Account Name   | `str` |
+| Account Number | `int` |
+| Password       | `str` |
 
 #### Response
 
-| Params      | Type        |
-| ----------- | ----------- |
-| uid         | `str`       |
-| Status      | `int`       |
-| Message     | `str`       |
+| Params  | Type  |
+| ------- | ----- |
+| uid     | `str` |
+| Status  | `int` |
+| Message | `str` |
 
 ### Deposit Money (request 2)
 
 #### Request
 
-| Params         | Type        |
-| -------------- | ----------- |
-| uid            | `str`       |
-| Account Name   | `str`       |
-| Account Number | `int`       |
-| Password       | `str`       |
-| Currency       | `str`       |
-| Amount         | `float`     |
+| Params         | Type    |
+| -------------- | ------- |
+| uid            | `str`   |
+| Account Name   | `str`   |
+| Account Number | `int`   |
+| Password       | `str`   |
+| Currency       | `str`   |
+| Amount         | `float` |
 
 #### Response
 
-| Params            | Type        |
-| ----------------- | ----------- |
-| uid               | `str`       |
-| Status            | `int`       |
-| Message (Balance) | `str`       |
+| Params            | Type  |
+| ----------------- | ----- |
+| uid               | `str` |
+| Status            | `int` |
+| Message (Balance) | `str` |
 
 ### Withdraw Money (request 3)
 
 #### Request
 
-| Params         | Type        |
-| -------------- | ----------- |
-| uid            | `str`       |
-| Account Name   | `str`       |
-| Account Number | `int`       |
-| Password       | `str`       |
-| Currency       | `str`       |
-| Amount         | `float`     |
+| Params         | Type    |
+| -------------- | ------- |
+| uid            | `str`   |
+| Account Name   | `str`   |
+| Account Number | `int`   |
+| Password       | `str`   |
+| Currency       | `str`   |
+| Amount         | `float` |
 
 #### Response
 
-| Params            | Type        |
-| ----------------- | ----------- |
-| uid               | `str`       |
-| Status            | `int`       |
-| Message (Balance) | `str`       |
+| Params            | Type  |
+| ----------------- | ----- |
+| uid               | `str` |
+| Status            | `int` |
+| Message (Balance) | `str` |
 
 ### Broadcast Account Update (TBC) (request 4)
 
 #### Request
 
-| Params           | Type        |
-| ---------------- | ----------- |
-| uid              | `str`       |
-| Account Name     | `str`       |
-| Account Number   | `int`       |
-| Password         | `str`       |
-| Monitor interval | `int`       |
+| Params           | Type  |
+| ---------------- | ----- |
+| uid              | `str` |
+| Account Name     | `str` |
+| Account Number   | `int` |
+| Password         | `str` |
+| Monitor interval | `int` |
 
 #### Response
 
-| Params      | Type        |
-| ----------- | ----------- |
-| uid         | `str`       |
-| Status      | `int`       |
-| Message     | `str`       |
+| Params  | Type  |
+| ------- | ----- |
+| uid     | `str` |
+| Status  | `int` |
+| Message | `str` |
 
 ### Transfer Money (request 5)
 
 #### Request
 
-| Params               | Type        |
-| -------------------- | ----------- |
-| uid                  | `str`       |
-| Account Name         | `str`       |
-| Account Number       | `int`       |
-| Password             | `str`       |
-| Currency             | `str`       |
-| Amount               | `float`     |
-| Payee Account Name   | `str`       |
-| Payee Account Number | `int`       |
+| Params               | Type    |
+| -------------------- | ------- |
+| uid                  | `str`   |
+| Account Name         | `str`   |
+| Account Number       | `int`   |
+| Password             | `str`   |
+| Currency             | `str`   |
+| Amount               | `float` |
+| Payee Account Name   | `str`   |
+| Payee Account Number | `int`   |
 
 #### Response
 
-| Params            | Type        |
-| ----------------- | ----------- |
-| uid               | `str`       |
-| Status            | `int`       |
-| Message (Balance) | `str`       |
+| Params            | Type  |
+| ----------------- | ----- |
+| uid               | `str` |
+| Status            | `int` |
+| Message (Balance) | `str` |
 
-### Check Account Balance (request 0)
+### Check Account Balance (request 6)
 
 #### Request
 
-| Params         | Type        |
-| -------------- | ----------- |
-| uid            | `str`       |
-| Account Name   | `str`       |
-| Account Number | `int`       |
-| Password       | `str`       |
+| Params         | Type  |
+| -------------- | ----- |
+| uid            | `str` |
+| Account Name   | `str` |
+| Account Number | `int` |
+| Password       | `str` |
 
 #### Response
 
-| Params                    | Type        |
-| ------------------------- | ----------- |
-| uid                       | `str`       |
-| Status                    | `int`       |
-| Message (Account Balance) | `str`       |
+| Params                    | Type  |
+| ------------------------- | ----- |
+| uid                       | `str` |
+| Status                    | `int` |
+| Message (Account Balance) | `str` |
 
 ## Clients
 
@@ -192,7 +192,6 @@ server start -> create a handler -> handler class creates accountManager class
 - [ ] At-most-once semantics (specify semantics as argument when starting server)
 - [ ] Simulate loss of request and reply
 - [ ] Fault tolerance
-
 
 #### Bank Class
 
