@@ -1,5 +1,6 @@
 package utils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Marshaller {
@@ -101,9 +102,10 @@ public class Marshaller {
         }
     }
 
-    public static byte[] marshall(HashMap<String, Object> replyParams) {
-        byte[] payload = new byte[0];
-        return payload;
+    public static byte[] marshall(HashMap<String, String> replyParams) {
+        String[] reply = { replyParams.get("uid"), replyParams.get("status"), replyParams.get("message") };
+        String joinedReply = String.join("|", reply);
+        return joinedReply.getBytes();
     };
 
 }
