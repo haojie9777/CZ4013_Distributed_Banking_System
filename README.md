@@ -26,7 +26,7 @@ project file and folder structure goes here
 
 For now, we use Ack to return '1' for success, '0' for error, then message to return response or error messages 
 
-### Open Account (request 1)
+### Open Account (request 0)
 
 #### Request
 
@@ -43,10 +43,10 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 | Params                    | Type        |
 | ------------------------- | ----------- |
 | uid                       | `str`       |
-| Status                       | `int`       |
+| Status                    | `int`       |
 | Message (Account Number)  | `str`       |
 
-### Close Account (request 2)
+### Close Account (request 1)
 
 #### Request
 
@@ -62,10 +62,10 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 | Params      | Type        |
 | ----------- | ----------- |
 | uid         | `str`       |
-| Status         | `int`       |
+| Status      | `int`       |
 | Message     | `str`       |
 
-### Deposit Money (request 3)
+### Deposit Money (request 2)
 
 #### Request
 
@@ -83,10 +83,10 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 | Params            | Type        |
 | ----------------- | ----------- |
 | uid               | `str`       |
-| Status               | `int`       |
+| Status            | `int`       |
 | Message (Balance) | `str`       |
 
-### Withdraw Money (request 4)
+### Withdraw Money (request 3)
 
 #### Request
 
@@ -104,7 +104,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 | Params            | Type        |
 | ----------------- | ----------- |
 | uid               | `str`       |
-| Status               | `int`       |
+| Status            | `int`       |
 | Message (Balance) | `str`       |
 
 ### Broadcast Account Update (TBC) (request 4)
@@ -124,7 +124,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 | Params      | Type        |
 | ----------- | ----------- |
 | uid         | `str`       |
-| Status         | `int`       |
+| Status      | `int`       |
 | Message     | `str`       |
 
 ### Transfer Money (request 5)
@@ -147,10 +147,10 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 | Params            | Type        |
 | ----------------- | ----------- |
 | uid               | `str`       |
-| Status               | `int`       |
+| Status            | `int`       |
 | Message (Balance) | `str`       |
 
-### Check Account Balance (request 6)
+### Check Account Balance (request 0)
 
 #### Request
 
@@ -166,7 +166,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 | Params                    | Type        |
 | ------------------------- | ----------- |
 | uid                       | `str`       |
-| Status                       | `int`       |
+| Status                    | `int`       |
 | Message (Account Balance) | `str`       |
 
 ## Clients
