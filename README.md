@@ -205,5 +205,10 @@ server start -> create a handler -> handler class creates accountManager class
 
 ### Client (Python)
 
-- [ ]
-- [ ]
+- [x] Open account
+- [ ] Close account
+- [ ] Deposit
+- [ ] Withdraw
+- [ ] Broadcast update to subscribers
+- [x] (Idempotent) Check account balance
+- [ ] (Non-idempotent) Transfer money
