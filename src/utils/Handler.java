@@ -1,6 +1,5 @@
-package Utils;
+package utils;
 
-import Bank.Account;
 import Bank.AccountManager;
 
 import java.util.HashMap;
