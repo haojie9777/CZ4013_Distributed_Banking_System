@@ -75,12 +75,15 @@ public class AccountManager {
         }
         else{
             if (name == account.getName() && password == account.getPassword()){
-                account.setBalance(account.getBalance() - amount);
-                if (account.getBalance() < 0){
+                float newBalance = account.getBalance() -amount;
+                if (newBalance >= 0){
+                    account.setBalance(account.getBalance() - amount);
+                    accountsHashMap.put(accountNumber, account);
+                    return account.getBalance();
+                }
+                else{
                     return -3;
                 }
-                accountsHashMap.put(accountNumber, account);
-                return account.getBalance();
             }
             else{
                 return -2;
