@@ -32,15 +32,17 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 | Params            | Type        |
 | ----------------- | ----------- |
+| uid               | `str`       |
 | Account Name      | `str`       |
 | Password          | `str`       |
 | Currency          | `str`       |
-| Initial balance   | `float`       |
+| Initial balance   | `float`     |
 
 #### Response
 
 | Params                    | Type        |
 | ------------------------- | ----------- |
+| uid                       | `str`       |
 | Ack                       | `int`       |
 | Message (Account Number)  | `str`       |
 
@@ -50,6 +52,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 | Params         | Type        |
 | -------------- | ----------- |
+| uid            | `str`       |
 | Account Name   | `str`       |
 | Account Number | `int`       |
 | Password       | `str`       |
@@ -58,6 +61,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 | Params      | Type        |
 | ----------- | ----------- |
+| uid         | `str`       |
 | Ack         | `int`       |
 | Message     | `str`       |
 
@@ -67,6 +71,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 | Params         | Type        |
 | -------------- | ----------- |
+| uid            | `str`       |
 | Account Name   | `str`       |
 | Account Number | `int`       |
 | Password       | `str`       |
@@ -77,6 +82,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 | Params            | Type        |
 | ----------------- | ----------- |
+| uid               | `str`       |
 | Ack               | `int`       |
 | Message (Balance) | `str`       |
 
@@ -86,6 +92,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 | Params         | Type        |
 | -------------- | ----------- |
+| uid            | `str`       |
 | Account Name   | `str`       |
 | Account Number | `int`       |
 | Password       | `str`       |
@@ -96,6 +103,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 | Params            | Type        |
 | ----------------- | ----------- |
+| uid               | `str`       |
 | Ack               | `int`       |
 | Message (Balance) | `str`       |
 
@@ -105,6 +113,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 | Params           | Type        |
 | ---------------- | ----------- |
+| uid              | `str`       |
 | Account Name     | `str`       |
 | Account Number   | `int`       |
 | Password         | `str`       |
@@ -114,6 +123,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 | Params      | Type        |
 | ----------- | ----------- |
+| uid         | `str`       |
 | Ack         | `int`       |
 | Message     | `str`       |
 
@@ -123,6 +133,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 | Params               | Type        |
 | -------------------- | ----------- |
+| uid                  | `str`       |
 | Account Name         | `str`       |
 | Account Number       | `int`       |
 | Password             | `str`       |
@@ -135,6 +146,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 | Params            | Type        |
 | ----------------- | ----------- |
+| uid               | `str`       |
 | Ack               | `int`       |
 | Message (Balance) | `str`       |
 
@@ -144,6 +156,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 | Params         | Type        |
 | -------------- | ----------- |
+| uid            | `str`       |
 | Account Name   | `str`       |
 | Account Number | `int`       |
 | Password       | `str`       |
@@ -152,6 +165,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 | Params                    | Type        |
 | ------------------------- | ----------- |
+| uid                       | `str`       |
 | Ack                       | `int`       |
 | Message (Account Balance) | `str`       |
 
