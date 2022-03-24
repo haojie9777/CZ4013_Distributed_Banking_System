@@ -7,11 +7,11 @@ public class Marshaller {
      * Handles marshalling and unmarshalling
      */
 
-    public static HashMap<String, Object> unmarshall(byte[] data) {
+    public static HashMap<String, String> unmarshall(byte[] data) {
         String requestParams[] = new String(data).split("|");
         String requestType = requestParams[0];
 
-        HashMap<String, Object> request = new HashMap<String, Object>();
+        HashMap<String, String> request = new HashMap<String, String>();
 
         switch (requestType) {
             case "0":
@@ -21,7 +21,7 @@ public class Marshaller {
                 request.put("accountName", requestParams[2]);
                 request.put("password", requestParams[3]);
                 request.put("currency", requestParams[4]);
-                request.put("initialBalance", Float.parseFloat(requestParams[5]));
+                request.put("initialBalance", requestParams[5]);
 
                 return request;
 
@@ -41,10 +41,10 @@ public class Marshaller {
                 request.put("requestType", requestParams[0]);
                 request.put("uid", requestParams[1]);
                 request.put("accountName", requestParams[2]);
-                request.put("accountNumber", Integer.parseInt(requestParams[3]));
+                request.put("accountNumber", requestParams[3]);
                 request.put("password", requestParams[4]);
                 request.put("currency", requestParams[5]);
-                request.put("amount", Float.parseFloat(requestParams[6]));
+                request.put("amount", requestParams[6]);
 
                 return request;
 
@@ -53,10 +53,10 @@ public class Marshaller {
                 request.put("requestType", requestParams[0]);
                 request.put("uid", requestParams[1]);
                 request.put("accountName", requestParams[2]);
-                request.put("accountNumber", Integer.parseInt(requestParams[3]));
+                request.put("accountNumber", requestParams[3]);
                 request.put("password", requestParams[4]);
                 request.put("currency", requestParams[5]);
-                request.put("amount", Float.parseFloat(requestParams[6]));
+                request.put("amount", requestParams[6]);
 
                 return request;
 
@@ -65,9 +65,9 @@ public class Marshaller {
                 request.put("requestType", requestParams[0]);
                 request.put("uid", requestParams[1]);
                 request.put("accountName", requestParams[2]);
-                request.put("accountNumber", Integer.parseInt(requestParams[3]));
+                request.put("accountNumber", requestParams[3]);
                 request.put("password", requestParams[4]);
-                request.put("monitorInterval", Integer.parseInt(requestParams[5]));
+                request.put("monitorInterval", requestParams[5]);
 
                 return request;
 
@@ -76,12 +76,12 @@ public class Marshaller {
                 request.put("requestType", requestParams[0]);
                 request.put("uid", requestParams[1]);
                 request.put("accountName", requestParams[2]);
-                request.put("accountNumber", Integer.parseInt(requestParams[3]));
+                request.put("accountNumber", requestParams[3]);
                 request.put("password", requestParams[4]);
                 request.put("currency", requestParams[5]);
-                request.put("amount", Float.parseFloat(requestParams[6]));
+                request.put("amount", requestParams[6]);
                 request.put("payeeAccountName", requestParams[7]);
-                request.put("payeeAccountNumber", Integer.parseInt(requestParams[8]));
+                request.put("payeeAccountNumber", requestParams[8]);
 
                 return request;
 
@@ -90,13 +90,13 @@ public class Marshaller {
                 request.put("requestType", requestParams[0]);
                 request.put("uid", requestParams[1]);
                 request.put("accountName", requestParams[2]);
-                request.put("accountNumber", Integer.parseInt(requestParams[3]));
+                request.put("accountNumber", requestParams[3]);
                 request.put("password", requestParams[4]);
 
                 return request;
 
             default:
-                System.out.println("Invalid Reuqest");
+                System.out.println("Invalid Request");
                 return request;
         }
     }
