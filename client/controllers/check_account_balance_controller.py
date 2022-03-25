@@ -58,7 +58,7 @@ class CheckAccountBalanceController(BaseController):
         :return:
         """
         reply_msg = request(ServiceType.OPEN_ACCOUNT, account_name, str(account_number), account_password)
-        return reply_msg.data[0]
+        return reply_msg.data
 
         # if facility_name == 'test error':
         #     raise Exception('Facility Is Not Included In The System!')

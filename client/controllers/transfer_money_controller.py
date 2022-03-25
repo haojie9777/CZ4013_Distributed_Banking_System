@@ -90,4 +90,4 @@ class TransferMoneyController(BaseController):
                             account_currencyType.value, str(transfer_amount), payee_account_name, str(payee_account_number))
         if reply_msg.msg_type == MessageType.EXCEPTION:
             raise Exception(reply_msg.error_msg)
-        return reply_msg.data[0]
+        return reply_msg.data

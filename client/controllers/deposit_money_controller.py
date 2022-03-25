@@ -81,4 +81,4 @@ class DepositMoneyController(BaseController):
         reply_msg = request(ServiceType.DEPOSIT_MONEY, account_name, str(account_number), account_password, account_currencyType.value, str(deposit_amount))
         if reply_msg.msg_type == MessageType.EXCEPTION:
             raise Exception(reply_msg.error_msg)
-        return reply_msg.data[0]
+        return reply_msg.data

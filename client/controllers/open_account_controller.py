@@ -64,7 +64,7 @@ class OpenAccountController(BaseController):
                 raise Exception('Password can only be alphanumeric characters, password must have 6 characters!')
             print_message("Opening account...")
             account_number = self.open_account(account_name, account_password, account_currencyType, account_balance)
-            print_message(msg=f'\nYour Have Successfully opened an account: {account_number}')
+            print_message(msg=f'\nYou have successfully opened an account: {account_number}')
         except Exception as e:
             print_error(f'Open account failed: {str(e)}')
 

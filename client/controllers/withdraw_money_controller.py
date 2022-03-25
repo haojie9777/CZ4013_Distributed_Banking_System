@@ -83,4 +83,4 @@ class WithdrawMoneyController(BaseController):
                             account_currencyType.value, str(withdraw_amount))
         if reply_msg.msg_type == MessageType.EXCEPTION:
             raise Exception(reply_msg.error_msg)
-        return reply_msg.data[0]
+        return reply_msg.data

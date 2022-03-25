@@ -70,7 +70,7 @@ class SubscribeUpdatesController(BaseController):
         reply_msg = request(ServiceType.SUBSCRIBE_UPDATES, account_name, str(account_number), account_password, str(monitor_interval))
         if reply_msg.msg_type == MessageType.EXCEPTION:
             raise Exception(reply_msg.error_msg)
-        return reply_msg.data[0]
+        return reply_msg.data
 
     @classmethod
     def display_events(cls, msg: Union[CallMessage, OneWayMessage, ExceptionMessage]):
@@ -83,7 +83,7 @@ class SubscribeUpdatesController(BaseController):
         if type(msg) is ExceptionMessage:
             print_error(f'Exception Received From Server: {msg.error_msg}')
         else:
-            prompt_message_decorator(msg.data[0])
+            prompt_message_decorator(msg.data)
 
         notify(service=ServiceType.SUBSCRIBE_UPDATES, request_id=msg.request_id)
 
