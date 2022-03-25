@@ -16,7 +16,7 @@ public class Handler {
     }
     public HashMap<String,String> handleRequest(HashMap<String, String> request){
         String requestType = request.get("requestType");
-        String UID = request.get("uid");
+        String requestId = request.get("requestId");
         String status = "1";
         String message = null;
         HashMap<String, String> reply = new HashMap<String, String>();
@@ -104,7 +104,7 @@ public class Handler {
 
             }
         }
-        reply.put("uid",UID);
+        reply.put("requestId",requestId);
         reply.put("status",status);
         reply.put("message",message);
         return reply;

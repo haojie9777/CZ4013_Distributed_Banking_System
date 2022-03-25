@@ -18,20 +18,24 @@ public class Server {
         Handler handler = new Handler(); //initialize handler for the rest of this server session
 
         while (true){
-            //receive new request from clients
+            //receive new request from a client
             request = new DatagramPacket(receivedBuffer,receivedBuffer.length );
             aSocket.receive(request); //blocked here if no request
             //unmarshall request
-            String s = new String(receivedBuffer, StandardCharsets.UTF_8);
             HashMap<String, String> unmarshalledRequest = Marshaller.unmarshall(receivedBuffer);
+
+            //check for duplicated request if using at-most-once semantics
+            if (atLeastOnce){
+                String requestID = unmarshalledRequest.get("requestId");
+
+            }
 
             //service request
             HashMap<String, String> response = handler.handleRequest(unmarshalledRequest);
-            System.out.println(response);
             //marshall response
             byte[] marshalledResponse = Marshaller.marshall(response);
 
-
+            //send response to client
             DatagramPacket reply = new DatagramPacket(marshalledResponse, marshalledResponse.length, request.getAddress(), request.getPort());
             aSocket.send(reply);
         }
