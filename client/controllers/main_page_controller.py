@@ -1,7 +1,7 @@
 import sys
 
 from controllers import BaseController, CheckAccountBalanceController, CloseAccountController, \
-    OpenAccountController, FacilityBookingChangingController, FacilityAvailSubscribingController, DepositMoneyController, WithdrawMoneyController
+    OpenAccountController, SubscribeUpdatesController, TransferMoneyController, DepositMoneyController, WithdrawMoneyController
 from utils import *
 from helpers import *
 
@@ -20,11 +20,11 @@ class MainPageController(BaseController):
         return [
             "Open a new account",
             "Close an account",
-            "Subscribe to updates",
             "Deposit Money",
             "Withdraw Money",
-            "Check account balance",
+            "Subscribe to updates",
             "Transfer Money to another account",
+            "Check account balance",
             "Exit"
         ]
 
@@ -44,15 +44,15 @@ class MainPageController(BaseController):
         elif user_choice == 1:
             CloseAccountController.start()
         elif user_choice == 2:
-            FacilityBookingController(facility_name_list=self.retrieve_facility_name_list()).start()
-        elif user_choice == 3:
             DepositMoneyController.start()
-        elif user_choice == 4:
+        elif user_choice == 3:
             WithdrawMoneyController().start()
+        elif user_choice == 4:
+            SubscribeUpdatesController().start()
         elif user_choice == 5:
-            CheckAccountBalanceController.start()
+            TransferMoneyController().start()
         elif user_choice == 6:
-            FacilityAvailSubscribingController(facility_name_list=self.retrieve_facility_name_list()).start()
+            CheckAccountBalanceController.start()
         else:
             self.exit()
 

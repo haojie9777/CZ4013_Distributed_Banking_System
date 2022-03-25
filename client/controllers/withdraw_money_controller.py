@@ -44,11 +44,11 @@ class WithdrawMoneyController(BaseController):
                                                       min_choice=0)
         account_currencyType = CurrencyType[self.currency_list[account_currencyType_choice]]
         withdraw_amount = get_float_input(f'Please indicate amount to withdraw')
-        self.handler(account_number, account_name, account_password, account_currencyType, withdraw_amount)
+        self.handler(account_name, account_number, account_password, account_currencyType, withdraw_amount)
         print_options(self.ctrl_list)
         return get_menu_option(max_choice=len(self.ctrl_list))
 
-    def handler(self, account_number: int, account_name: str, account_password: str, account_currencyType: CurrencyType,
+    def handler(self, account_name: str, account_number: int, account_password: str, account_currencyType: CurrencyType,
                 withdraw_amount: float):
         """
         This handles the input from the users by logging hint information and make requests to the server
@@ -61,14 +61,16 @@ class WithdrawMoneyController(BaseController):
         """
         try:
             print_message("Withdrawing money...")
-            account_number = self.withdraw_money(account_number, account_name, account_password, account_currencyType, withdraw_amount)
+            account_number = self.withdraw_money(account_name, account_number, account_password, account_currencyType,
+                                                 withdraw_amount)
             print_message(msg=f'\nYour Have withdrawn money from your account: {account_number}')
         except Exception as e:
             print_error(f'Withdraw money failed: {str(e)}')
 
     @staticmethod
-    def withdraw_money(account_number: int, account_name: str, account_password: str, account_currencyType: CurrencyType,
-                      withdraw_amount: float) -> str:
+    def withdraw_money(account_name: str, account_number: int, account_password: str,
+                       account_currencyType: CurrencyType,
+                       withdraw_amount: float) -> str:
         """
         This makes request to the server to book the facility
         :param account_currencyType:
@@ -77,7 +79,8 @@ class WithdrawMoneyController(BaseController):
         :param account_name:
         :return: 
         """
-        reply_msg = request(ServiceType.WITHDRAW_MONEY, account_number, account_name, account_password, account_currencyType.value, str(withdraw_amount))
+        reply_msg = request(ServiceType.WITHDRAW_MONEY, account_name, str(account_number), account_password,
+                            account_currencyType.value, str(withdraw_amount))
         if reply_msg.msg_type == MessageType.EXCEPTION:
             raise Exception(reply_msg.error_msg)
         return reply_msg.data[0]
