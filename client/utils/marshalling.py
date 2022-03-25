@@ -145,10 +145,10 @@ def unmarshall(data: bytes) -> Union[ReplyMessage, OneWayMessage, ExceptionMessa
     print(request_id)
     message_status = decoded_data_list[1]
     print(message_status)
-    if message_status == 0:
+    if message_status == '0':
         error_message = decoded_data_list[2]
         return ExceptionMessage(request_id=request_id, error_msg=error_message)
-    elif message_status == 1:
+    elif message_status == '1':
         return ReplyMessage(request_id=request_id, data=decoded_data_list[2])
     else:
         raise TypeError('Unexpected Message Of Type CALL Received!')
