@@ -72,6 +72,7 @@ public class Handler {
                 else {
                     message = "New account balance = "+String.valueOf(newBalance);
                 }
+                break;
             }
 
             case "3": {
@@ -98,6 +99,7 @@ public class Handler {
                 else {
                     message = "New account balance = "+String.valueOf(newBalance);
                 }
+                break;
             }
             //TODO
             case "4": {

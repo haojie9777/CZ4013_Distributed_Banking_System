@@ -33,6 +33,7 @@ public class Server {
                 }
             else{
                 HashMap<String, String> response = handler.handleRequest(unmarshalledRequest);  //service request
+                System.out.println(response);
                 byte[] marshalledResponse = Marshaller.marshall(response); //marshall response
                 history.addReply(requestId, marshalledResponse); //store reply in history
                 //send response to client
