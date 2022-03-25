@@ -23,15 +23,15 @@ class CheckAccountBalanceController(BaseController):
         return None
 
     def enter(self, *args, **kwargs) -> int:
-        account_number = get_int_input(f'Please indicate account number')
         account_name = get_string_input(f'Please indicate name')
+        account_number = get_int_input(f'Please indicate account number')
         account_password = get_string_input(f'Please indicate password')
 
-        self.handler(account_number, account_name, account_password)
+        self.handler(account_name, account_number, account_password)
         print_options(self.ctrl_list)
         return get_menu_option(max_choice=len(self.ctrl_list))
 
-    def handler(self, account_number: int, account_name: str, account_password: str):
+    def handler(self, account_name: str, account_number: int, account_password: str):
         """
         This handles the input from the users by logging hint information and makes request to the server for
         the availability check
@@ -42,14 +42,14 @@ class CheckAccountBalanceController(BaseController):
         """
         print_message(f'Checking account balance...')
         try:
-            balance = self.retrieve_account_balance(account_number, account_name, account_password)
+            balance = self.retrieve_account_balance(account_name, account_number, account_password)
             reply_string = "Account balance is: " + balance
             print_message(reply_string)
         except Exception as e:
             print_error(f"Bad Request Detected! {str(e)}")
 
     @staticmethod
-    def retrieve_account_balance(account_number: int, account_name: str, account_password: str) -> str:
+    def retrieve_account_balance(account_name: str, account_number: int, account_password: str) -> str:
         """
         This makes request to the server for the facility availability
         :param account_number:
@@ -57,7 +57,7 @@ class CheckAccountBalanceController(BaseController):
         :param account_password:
         :return:
         """
-        reply_msg = request(ServiceType.OPEN_ACCOUNT, account_number, account_name, account_password)
+        reply_msg = request(ServiceType.OPEN_ACCOUNT, account_name, str(account_number), account_password)
         return reply_msg.data[0]
 
         # if facility_name == 'test error':

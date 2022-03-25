@@ -90,4 +90,4 @@ class OpenAccountController(BaseController):
                             str(account_balance))
         if reply_msg.msg_type == MessageType.EXCEPTION:
             raise Exception(reply_msg.error_msg)
-        return reply_msg.data[0]
+        return reply_msg.data

@@ -4,6 +4,12 @@ import struct
 from uuid import uuid4 as uuid
 
 
+class MessageType(Enum):
+    CALL = "CALL"
+    REPLY = "REPLY"
+    ONEWAY = "ONEWAY"
+    EXCEPTION = "EXCEPTION"
+
 
 class ServiceType(Enum):
     OPEN_ACCOUNT = '0'
@@ -13,7 +19,6 @@ class ServiceType(Enum):
     WITHDRAW_MONEY = '4'
     CHECK_BALANCE = '5'
     TRANSFER_MONEY = '6'
-
 
 
 type_to_hex = dict({
@@ -29,6 +34,7 @@ class BaseMessage:
     """
     Super class for all kinds of messages expected from the server
     """
+
     def __init__(self, request_id: str):
         self.request_id = request_id
 
@@ -37,6 +43,7 @@ class CallMessage(BaseMessage):
     """
     UDP message of type CALL
     """
+
     def __init__(self, service: ServiceType, data: Tuple):
         super().__init__(str(uuid()))
         self.service = service
@@ -87,7 +94,8 @@ class ReplyMessage(BaseMessage):
     """
     UDP message of type REPLY
     """
-    def __init__(self, request_id: str, data: list):
+
+    def __init__(self, request_id: str, data: str):
         super().__init__(request_id)
         self.msg_type = MessageType.REPLY
         self.data = data
@@ -97,6 +105,7 @@ class ExceptionMessage(BaseMessage):
     """
     UDP message of type EXCEPTION
     """
+
     def __init__(self, request_id: str, error_msg: str):
         super().__init__(request_id)
         self.msg_type = MessageType.EXCEPTION
@@ -107,6 +116,7 @@ class OneWayMessage(ReplyMessage):
     """
     UDP message of type ONEWAR (a.k.a NOTIFY)
     """
+
     def __init__(self, service: ServiceType, request_id: str, data: list):
         super().__init__(request_id, data)
         self.msg_type = MessageType.ONEWAY
@@ -127,17 +137,15 @@ def unmarshall(data: bytes) -> Union[ReplyMessage, OneWayMessage, ExceptionMessa
     :return: A UDP message of type REPLY, ONEWAY or EXCEPTION
     """
     ptr = 0
-    request_id = data[ptr:ptr + 36].decode('ascii')
-    ptr += 36
     message_status = data[ptr]
     ptr += 1
-    if msg_type_id == 3:
-        error_message = data[ptr+5:].decode('ascii')
+    request_id = data[ptr:ptr + 36].decode('ascii')
+    ptr += 36
+    if message_status == 0:
+        error_message = data[ptr:].decode('ascii')
         return ExceptionMessage(request_id=request_id, error_msg=error_message)
-    elif msg_type_id == 1:
-        return ReplyMessage(request_id=request_id, data=parse_data(data, ptr))
-    elif msg_type_id == 2:
-        return OneWayMessage(request_id=request_id, data=parse_data(data, ptr))
+    elif message_status == 1:
+        return ReplyMessage(request_id=request_id, data=data[ptr:].decode('ascii'))
     else:
         raise TypeError('Unexpected Message Of Type CALL Received!')
 
@@ -194,4 +202,5 @@ if __name__ == '__main__':
     msg = CallMessage(service=ServiceType.FACILITY_AVAIL_CHECKING, data=('North Hill Gym', ['Sun', 'Coming Mon']))
     bytes_msg = msg.marshall()
     from helpers import UDPClientSocket
+
     UDPClientSocket.send_msg(msg=bytes_msg, request_id=msg.request_id)
