@@ -136,20 +136,20 @@ def unmarshall(data: bytes) -> Union[ReplyMessage, OneWayMessage, ExceptionMessa
     :param data: raw data in bytes
     :return: A UDP message of type REPLY, ONEWAY or EXCEPTION
     """
-    print(data)
     ptr = 0
-    request_id = data[ptr:ptr + 36].decode('ascii')
-    ptr += 37
+    decoded_data = data.decode('ascii')
+    print(decoded_data)
+    decoded_data_list = decoded_data.split('|')
+    print(decoded_data_list)
+    request_id = decoded_data_list[0]
     print(request_id)
-    message_status = data[ptr].decode('ascii')
+    message_status = decoded_data_list[1]
     print(message_status)
-    ptr += 2
-
     if message_status == 0:
-        error_message = data[ptr:].decode('ascii')
+        error_message = decoded_data_list[2]
         return ExceptionMessage(request_id=request_id, error_msg=error_message)
     elif message_status == 1:
-        return ReplyMessage(request_id=request_id, data=data[ptr:].decode('ascii'))
+        return ReplyMessage(request_id=request_id, data=decoded_data_list[2])
     else:
         raise TypeError('Unexpected Message Of Type CALL Received!')
 
