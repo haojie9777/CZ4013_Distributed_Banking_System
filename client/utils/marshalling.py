@@ -136,11 +136,15 @@ def unmarshall(data: bytes) -> Union[ReplyMessage, OneWayMessage, ExceptionMessa
     :param data: raw data in bytes
     :return: A UDP message of type REPLY, ONEWAY or EXCEPTION
     """
+    print(data)
     ptr = 0
-    message_status = data[ptr]
-    ptr += 1
     request_id = data[ptr:ptr + 36].decode('ascii')
-    ptr += 36
+    ptr += 37
+    print(request_id)
+    message_status = data[ptr].decode('ascii')
+    print(message_status)
+    ptr += 2
+
     if message_status == 0:
         error_message = data[ptr:].decode('ascii')
         return ExceptionMessage(request_id=request_id, error_msg=error_message)
