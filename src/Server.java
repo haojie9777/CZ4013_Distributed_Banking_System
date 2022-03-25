@@ -23,9 +23,7 @@ public class Server {
             aSocket.receive(request); //blocked here if no request
             //unmarshall request
             String s = new String(receivedBuffer, StandardCharsets.UTF_8);
-            System.out.println(s);
             HashMap<String, String> unmarshalledRequest = Marshaller.unmarshall(receivedBuffer);
-            System.out.println(unmarshalledRequest);
 
             //service request
             HashMap<String, String> response = handler.handleRequest(unmarshalledRequest);
