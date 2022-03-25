@@ -2,6 +2,7 @@ package utils;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Marshaller {
@@ -11,11 +12,11 @@ public class Marshaller {
 
     public static HashMap<String, String> unmarshall(byte[] data) {
         String requestRaw = new String(data, StandardCharsets.UTF_8);
-        String requestParams[] =  requestRaw.split("|");
+        String[] requestParams =  requestRaw.split("\\|");
+        System.out.println(Arrays.toString(requestParams));
         String requestType = requestParams[0];
 
         HashMap<String, String> request = new HashMap<String, String>();
-        System.out.println(requestParams);
         switch (requestType) {
             case "0":
                 System.out.println("Marshalling Open Account Request");
@@ -25,6 +26,8 @@ public class Marshaller {
                 request.put("password", requestParams[3]);
                 request.put("currency", requestParams[4]);
                 request.put("initialBalance", requestParams[5]);
+                System.out.println(request);
+
                 return request;
 
             case "1": {
