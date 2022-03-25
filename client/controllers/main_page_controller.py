@@ -42,9 +42,9 @@ class MainPageController(BaseController):
         if user_choice == 0:
             OpenAccountController().start()
         elif user_choice == 1:
-            CloseAccountController.start()
+            CloseAccountController().start()
         elif user_choice == 2:
-            DepositMoneyController.start()
+            DepositMoneyController().start()
         elif user_choice == 3:
             WithdrawMoneyController().start()
         elif user_choice == 4:
@@ -52,7 +52,7 @@ class MainPageController(BaseController):
         elif user_choice == 5:
             TransferMoneyController().start()
         elif user_choice == 6:
-            CheckAccountBalanceController.start()
+            CheckAccountBalanceController().start()
         else:
             self.exit()
 
