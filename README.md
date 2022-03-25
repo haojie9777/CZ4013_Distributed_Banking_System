@@ -188,8 +188,8 @@ server start -> create a handler -> handler class creates accountManager class
 - [x] Service request
 - [x] Service reply
 - [x] Marshalling/unmarshalling
-- [ ] At-least-once semantics (specify semantics as argument when starting server)
-- [ ] At-most-once semantics (specify semantics as argument when starting server)
+- [x] At-least-once semantics (specify semantics as argument when starting server)
+- [x] At-most-once semantics (specify semantics as argument when starting server)
 - [ ] Simulate loss of request and reply
 - [ ] Fault tolerance
 - [ ] Set currency to enum type
