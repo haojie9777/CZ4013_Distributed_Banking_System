@@ -16,9 +16,9 @@ public class Handler {
     }
     public HashMap<String,String> handleRequest(HashMap<String, String> request){
         String requestType = request.get("requestType");
-        String UID = request.get("UID");
+        String UID = request.get("uid");
         String status = "1";
-        String message = new String();
+        String message = null;
         HashMap<String, String> reply = new HashMap<String, String>();
         switch (requestType){
             case "0": {
@@ -27,9 +27,9 @@ public class Handler {
                 String password = request.get("password");
                 String currency = request.get("currency");
                 float initialBalance = Float.parseFloat(request.get("initialBalance"));
-
                 int newAccountNum = accountManager.openAccount(accountName, password, currency, initialBalance);
-                message = String.valueOf((newAccountNum));
+                message = "Account successfully opened with account number of "+String.valueOf((newAccountNum));
+                System.out.println("Account successfully opened ");
                 break;
             }
             case "1": {
@@ -104,9 +104,9 @@ public class Handler {
 
             }
         }
-        reply.put("UID",UID);
-        reply.put("Status",status);
-        reply.put("Message",message);
+        reply.put("uid",UID);
+        reply.put("status",status);
+        reply.put("message",message);
         return reply;
     }
 

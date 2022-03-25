@@ -27,7 +27,7 @@ public class Server {
 
             //service request
             HashMap<String, String> response = handler.handleRequest(unmarshalledRequest);
-
+            System.out.println(response);
             //marshall response
             byte[] marshalledResponse = Marshaller.marshall(response);
 
