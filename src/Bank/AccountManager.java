@@ -58,7 +58,7 @@ public class AccountManager {
             return -1;
         }
         else{
-            if (name == account.getName() && password == account.getPassword()){
+            if (name.equals(account.getName()) && password.equals(account.getPassword())){
                 account.setBalance(account.getBalance() + amount);
                 accountsHashMap.put(accountNumber, account);
                 return account.getBalance();
@@ -74,7 +74,7 @@ public class AccountManager {
             return -1;
         }
         else{
-            if (name == account.getName() && password == account.getPassword()){
+            if (name.equals(account.getName()) && password.equals(account.getPassword())){
                 float newBalance = account.getBalance() -amount;
                 if (newBalance >= 0){
                     account.setBalance(account.getBalance() - amount);
@@ -98,7 +98,7 @@ public class AccountManager {
             return -1;
         }
         else{
-            if (name == account.getName() && password == account.getPassword()){
+            if (name.equals(account.getName()) && password.equals(account.getPassword())){
                 return account.getBalance();
             }
             else{

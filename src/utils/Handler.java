@@ -58,7 +58,7 @@ public class Handler {
                 int accountNumber = Integer.parseInt(request.get("accountNumber"));
                 String password = request.get("password");
                 String currency = request.get("currency");
-                float amount = Float.parseFloat(request.get("Amount"));
+                float amount = Float.parseFloat(request.get("amount"));
 
                 float newBalance = accountManager.depositAccount(accountNumber, accountName, password, currency, amount);
                 if (newBalance == -1){ //account number not found
@@ -72,6 +72,7 @@ public class Handler {
                 else {
                     message = "New account balance = "+String.valueOf(newBalance);
                 }
+                break;
             }
 
             case "3": {
@@ -80,7 +81,7 @@ public class Handler {
                 int accountNumber = Integer.parseInt(request.get("accountNumber"));
                 String password = request.get("password");
                 String currency = request.get("currency");
-                float amount = Float.parseFloat(request.get("Amount"));
+                float amount = Float.parseFloat(request.get("amount"));
 
                 float newBalance = accountManager.withdrawAccount(accountNumber, accountName, password, currency, amount);
                 if (newBalance == -1){ //account number not found
@@ -98,6 +99,7 @@ public class Handler {
                 else {
                     message = "New account balance = "+String.valueOf(newBalance);
                 }
+                break;
             }
             //TODO
             case "4": {
