@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from controllers import BaseController
 from utils import *
 from helpers import *
@@ -11,7 +9,7 @@ class CurrencyType(Enum):
     RMB = "RMB"
 
 
-class OpenAccountController(BaseController):
+class WithdrawMoneyController(BaseController):
     """
     This is the controller to open bank account
     """
@@ -25,7 +23,7 @@ class OpenAccountController(BaseController):
 
     @property
     def message(self):
-        return 'Thanks for signing up with our bank! Please proceed to provide your details:'
+        return 'We hate to see your money leave! Please provide more details:'
 
     @property
     def options(self):
@@ -38,56 +36,48 @@ class OpenAccountController(BaseController):
     def enter(self, *args, **kwargs) -> int:
         self.show_message()
         account_name = get_string_input(f'Please indicate name')
-        account_password = get_string_input(f'Please indicate password, only input 6 characters')
+        account_number = get_int_input(f'Please indicate account number')
+        account_password = get_string_input(f'Please indicate password')
         print_options(self.options, show_number=False)
         account_currencyType_choice = get_menu_option(max_choice=len(self.currency_list),
                                                       msg='Please indicate account currency',
                                                       min_choice=0)
         account_currencyType = CurrencyType[self.currency_list[account_currencyType_choice]]
-        account_balance = get_float_input(f'Please indicate starting balance')
-        self.handler(account_name, account_password, account_currencyType, account_balance)
+        withdraw_amount = get_float_input(f'Please indicate amount to withdraw')
+        self.handler(account_number, account_name, account_password, account_currencyType, withdraw_amount)
         print_options(self.ctrl_list)
         return get_menu_option(max_choice=len(self.ctrl_list))
 
-    def handler(self, account_name: str, account_password: str, account_currencyType: CurrencyType,
-                account_balance: float):
+    def handler(self, account_number: int, account_name: str, account_password: str, account_currencyType: CurrencyType,
+                withdraw_amount: float):
         """
         This handles the input from the users by logging hint information and make requests to the server
-        :param account_balance:
+        :param withdraw_amount:
+        :param account_currencyType:
+        :param account_number:
         :param account_password:
         :param account_name:
-        :param account_currencyType:
         :return:
         """
         try:
-            if not self._check_password_isalnum(account_password) or len(account_password) != 6:
-                raise Exception('Password can only be alphanumeric characters, password must have 6 characters!')
-            print_message("Opening account...")
-            account_number = self.open_account(account_name, account_password, account_currencyType, account_balance)
-            print_message(msg=f'\nYour Have Successfully opened an account: {account_number}')
+            print_message("Withdrawing money...")
+            account_number = self.withdraw_money(account_number, account_name, account_password, account_currencyType, withdraw_amount)
+            print_message(msg=f'\nYour Have withdrawn money from your account: {account_number}')
         except Exception as e:
-            print_error(f'Open account failed: {str(e)}')
-
-    def _check_password_isalnum(self, password: str) -> bool:
-        """
-        This checks if the starting time and ending time are valid
-        :return:
-        """
-        return password.isalnum()
+            print_error(f'Withdraw money failed: {str(e)}')
 
     @staticmethod
-    def open_account(account_name: str, account_password: str, account_currencyType: CurrencyType,
-                     account_balance: float) -> str:
+    def withdraw_money(account_number: int, account_name: str, account_password: str, account_currencyType: CurrencyType,
+                      withdraw_amount: float) -> str:
         """
         This makes request to the server to book the facility
-        :param account_balance:
         :param account_currencyType:
+        :param account_number:
         :param account_password:
         :param account_name:
-        :return: an unique booking ID
+        :return: 
         """
-        reply_msg = request(ServiceType.OPEN_ACCOUNT, account_name, account_password, account_currencyType.value,
-                            str(account_balance))
+        reply_msg = request(ServiceType.WITHDRAW_MONEY, account_number, account_name, account_password, account_currencyType.value, str(withdraw_amount))
         if reply_msg.msg_type == MessageType.EXCEPTION:
             raise Exception(reply_msg.error_msg)
         return reply_msg.data[0]

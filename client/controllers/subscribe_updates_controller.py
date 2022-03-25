@@ -3,11 +3,6 @@ from utils import *
 from helpers import *
 
 
-class CurrencyType(Enum):
-    SGD = "SGD"
-    USD = "USD"
-    RMB = "RMB"
-
 
 class DepositMoneyController(BaseController):
     """
@@ -16,10 +11,8 @@ class DepositMoneyController(BaseController):
 
     def __init__(self):
         super().__init__()
-        self.currency_list = []
         self.ctrl_list = ['Back To Homepage', 'Make Another Booking']
-        for currency in CurrencyType:
-            self.currency_list.append(currency.name)
+
 
     @property
     def message(self):
@@ -77,7 +70,7 @@ class DepositMoneyController(BaseController):
         :param account_name:
         :return: 
         """
-        reply_msg = request(ServiceType.DEPOSIT_MONEY, account_number, account_name, account_password, account_currencyType.value, str(deposit_amount))
+        reply_msg = request(ServiceType.OPEN_ACCOUNT, account_number, account_name, account_password, account_currencyType.value, str(deposit_amount))
         if reply_msg.msg_type == MessageType.EXCEPTION:
             raise Exception(reply_msg.error_msg)
         return reply_msg.data[0]

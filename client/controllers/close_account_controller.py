@@ -58,7 +58,7 @@ class CloseAccountController(BaseController):
         :param account_name:
         :return: 
         """
-        reply_msg = request(ServiceType.OPEN_ACCOUNT,account_number, account_name, account_password)
+        reply_msg = request(ServiceType.CLOSE_ACCOUNT, account_number, account_name, account_password)
         if reply_msg.msg_type == MessageType.EXCEPTION:
             raise Exception(reply_msg.error_msg)
         return reply_msg.data[0]

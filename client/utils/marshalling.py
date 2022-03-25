@@ -6,13 +6,13 @@ from uuid import uuid4 as uuid
 
 
 class ServiceType(Enum):
-    OPEN_ACCOUNT = 1
-    CLOSE_ACCOUNT = 2
-    SUBSCRIBE_UPDATES = 3
-    DEPOSIT_MONEY = 4
-    WITHDRAW_MONEY = 5
-    CHECK_BALANCE = 6
-    TRANSFER_MONEY = 7
+    OPEN_ACCOUNT = '0'
+    CLOSE_ACCOUNT = '1'
+    SUBSCRIBE_UPDATES = '2'
+    DEPOSIT_MONEY = '3'
+    WITHDRAW_MONEY = '4'
+    CHECK_BALANCE = '5'
+    TRANSFER_MONEY = '6'
 
 
 
@@ -49,9 +49,9 @@ class CallMessage(BaseMessage):
         """
         msg_in_bytes = bytearray(self.service.value.encode('ascii'))
         # msg_in_bytes += struct.pack('B', len(self.service.value))
-        msg_in_bytes += bytes(self.request_id.encode('ascii'))
+        msg_in_bytes += bytes("|".encode('ascii')) + bytes(self.request_id.encode('ascii')) + bytes("|".encode('ascii'))
         for a in self.data:
-            msg_in_bytes += bytes(a.encode('ascii'))
+            msg_in_bytes += bytes(a.encode('ascii')) + bytes("|".encode('ascii'))
         return msg_in_bytes
 
     @classmethod
@@ -62,7 +62,7 @@ class CallMessage(BaseMessage):
         :param a: data to be serialized
         :return: serialized data in bytes
         """
-        type_a = type(a)
+        type_a = str
         serialized_form = type_to_hex[type_a]
 
         if type_a is int:

@@ -27,7 +27,7 @@ class UDPClientSocket:
     @classmethod
     def send_msg(cls, msg: bytes, request_id: str, wait_for_response: bool = True, time_out: int = 5,
                  max_attempt: int = float('inf'), buffer_size: int = 1024,
-                 simulate_comm_omission_fail=True) -> Union[ReplyMessage, OneWayMessage, ExceptionMessage, None]:
+                 simulate_comm_omission_fail=False) -> Union[ReplyMessage, OneWayMessage, ExceptionMessage, None]:
         """
         This will forward a message to the server
         :param msg: message to be included in the UDP message data part
