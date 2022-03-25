@@ -32,7 +32,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 | Params          | Type    |
 | --------------- | ------- |
-| uid             | `str`   |
+| requestId       | `str`   |
 | Account Name    | `str`   |
 | Password        | `str`   |
 | Currency        | `str`   |
@@ -42,7 +42,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 | Params                   | Type  |
 | ------------------------ | ----- |
-| uid                      | `str` |
+| requestId                | `str` |
 | Status                   | `int` |
 | Message (Account Number) | `str` |
 
@@ -52,7 +52,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 | Params         | Type  |
 | -------------- | ----- |
-| uid            | `str` |
+| requestId      | `str` |
 | Account Name   | `str` |
 | Account Number | `int` |
 | Password       | `str` |
@@ -61,9 +61,9 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 | Params  | Type  |
 | ------- | ----- |
-| uid     | `str` |
-| Status  | `int` |
-| Message | `str` |
+| requestId | `str` |
+| Status    | `int` |
+| Message   | `str` |
 
 ### Deposit Money (request 2)
 
@@ -71,7 +71,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 | Params         | Type    |
 | -------------- | ------- |
-| uid            | `str`   |
+| requestId      | `str`   |
 | Account Name   | `str`   |
 | Account Number | `int`   |
 | Password       | `str`   |
@@ -82,7 +82,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 | Params            | Type  |
 | ----------------- | ----- |
-| uid               | `str` |
+| requestId         | `str` |
 | Status            | `int` |
 | Message (Balance) | `str` |
 
@@ -92,7 +92,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 | Params         | Type    |
 | -------------- | ------- |
-| uid            | `str`   |
+| requestId      | `str`   |
 | Account Name   | `str`   |
 | Account Number | `int`   |
 | Password       | `str`   |
@@ -103,7 +103,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 | Params            | Type  |
 | ----------------- | ----- |
-| uid               | `str` |
+| requestId         | `str` |
 | Status            | `int` |
 | Message (Balance) | `str` |
 
@@ -113,7 +113,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 | Params           | Type  |
 | ---------------- | ----- |
-| uid              | `str` |
+| requestId        | `str` |
 | Account Name     | `str` |
 | Account Number   | `int` |
 | Password         | `str` |
@@ -121,11 +121,11 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 #### Response
 
-| Params  | Type  |
-| ------- | ----- |
-| uid     | `str` |
-| Status  | `int` |
-| Message | `str` |
+| Params      | Type  |
+| -------     | ----- |
+| requestId   | `str` |
+| Status      | `int` |
+| Message     | `str` |
 
 ### Transfer Money (request 5)
 
@@ -133,7 +133,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 | Params               | Type    |
 | -------------------- | ------- |
-| uid                  | `str`   |
+| requestId            | `str`   |
 | Account Name         | `str`   |
 | Account Number       | `int`   |
 | Password             | `str`   |
@@ -146,7 +146,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 | Params            | Type  |
 | ----------------- | ----- |
-| uid               | `str` |
+| requestId         | `str` |
 | Status            | `int` |
 | Message (Balance) | `str` |
 
@@ -156,7 +156,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 | Params         | Type  |
 | -------------- | ----- |
-| uid            | `str` |
+| requestId      | `str` |
 | Account Name   | `str` |
 | Account Number | `int` |
 | Password       | `str` |
@@ -165,7 +165,7 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 | Params                    | Type  |
 | ------------------------- | ----- |
-| uid                       | `str` |
+| requestId                 | `str` |
 | Status                    | `int` |
 | Message (Account Balance) | `str` |
 
@@ -188,8 +188,8 @@ server start -> create a handler -> handler class creates accountManager class
 - [x] Service request
 - [x] Service reply
 - [x] Marshalling/unmarshalling
-- [ ] At-least-once semantics (specify semantics as argument when starting server)
-- [ ] At-most-once semantics (specify semantics as argument when starting server)
+- [x] At-least-once semantics (specify semantics as argument when starting server)
+- [x] At-most-once semantics (specify semantics as argument when starting server)
 - [ ] Simulate loss of request and reply
 - [ ] Fault tolerance
 - [ ] Set currency to enum type

@@ -1,6 +1,5 @@
 import java.net.*;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import utils.*;
 public class Server {
@@ -15,7 +14,8 @@ public class Server {
 
 
         DatagramPacket request = null;
-        Handler handler = new Handler(); //initialize handler for the rest of this server session
+        Handler handler = new Handler(); //initialize handler
+        History history = new History(); //initialize history of requests and replies
 
         while (true){
             //receive new request from a client
@@ -24,20 +24,22 @@ public class Server {
             //unmarshall request
             HashMap<String, String> unmarshalledRequest = Marshaller.unmarshall(receivedBuffer);
 
-            //check for duplicated request if using at-most-once semantics
-            if (atLeastOnce){
-                String requestID = unmarshalledRequest.get("requestId");
+            String requestId = unmarshalledRequest.get("requestId");
+            if (atLeastOnce && history.requestExists(requestId)){ //check for duplicated request if using at-most-once semantics
+                    byte[] marshalledResponse = history.getReply(requestId);
+                    //send response to client
+                    DatagramPacket reply = new DatagramPacket(marshalledResponse, marshalledResponse.length, request.getAddress(), request.getPort());
+                    aSocket.send(reply);
+                }
+            else{
+                HashMap<String, String> response = handler.handleRequest(unmarshalledRequest);  //service request
+                byte[] marshalledResponse = Marshaller.marshall(response); //marshall response
+                history.addReply(requestId, marshalledResponse); //store reply in history
+                //send response to client
+                DatagramPacket reply = new DatagramPacket(marshalledResponse, marshalledResponse.length, request.getAddress(), request.getPort());
+                aSocket.send(reply);
+                }
 
-            }
-
-            //service request
-            HashMap<String, String> response = handler.handleRequest(unmarshalledRequest);
-            //marshall response
-            byte[] marshalledResponse = Marshaller.marshall(response);
-
-            //send response to client
-            DatagramPacket reply = new DatagramPacket(marshalledResponse, marshalledResponse.length, request.getAddress(), request.getPort());
-            aSocket.send(reply);
         }
 
 

@@ -13,13 +13,13 @@ public class SubscriptionService {
     }
 
     // add new subscriber to list of subscribers
-    public void addSubscriber(InetAddress ipAddress, int port, long monitorInterval){
+    public void addSubscriber(InetAddress ipAddress, int port, long monitorInterval) {
         Subscriber newSubscriber = new Subscriber(ipAddress, port, monitorInterval);
         this.subscribers.add(newSubscriber);
     }
 
     // returns all subscribed clients and removes expired clients
-    public ArrayList<Subscriber> getSubscribers(){
+    public ArrayList<Subscriber> getSubscribers() {
 
         ArrayList<Subscriber> subscribersList = new ArrayList<Subscriber>();
 
