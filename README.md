@@ -192,6 +192,8 @@ server start -> create a handler -> handler class creates accountManager class
 - [ ] At-most-once semantics (specify semantics as argument when starting server)
 - [ ] Simulate loss of request and reply
 - [ ] Fault tolerance
+- [ ] Set currency to enum type
+- [ ] Auto currency deposit
 
 #### Bank Class
 
@@ -212,3 +214,4 @@ server start -> create a handler -> handler class creates accountManager class
 - [ ] Broadcast update to subscribers
 - [x] (Idempotent) Check account balance
 - [ ] (Non-idempotent) Transfer money
+- [ ] Password to be fixed length
