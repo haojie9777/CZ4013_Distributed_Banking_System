@@ -7,8 +7,12 @@ public class Server {
 
     public static void main(String[] args) throws IOException {
         System.out.println("Running Server...");
+        //ask user for semantics to use: at-least-once or at-most-once
+        boolean atLeastOnce = true;
+
         DatagramSocket aSocket = new DatagramSocket(6789);
         byte[] receivedBuffer = new byte[65535];
+
 
         DatagramPacket request = null;
         Handler handler = new Handler(); //initialize handler for the rest of this server session
