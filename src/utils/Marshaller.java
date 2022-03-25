@@ -21,7 +21,7 @@ public class Marshaller {
             case "0":
                 System.out.println("Marshalling Open Account Request");
                 request.put("requestType", requestParams[0]);
-                request.put("uid", requestParams[1]);
+                request.put("requestId", requestParams[1]);
                 request.put("accountName", requestParams[2]);
                 request.put("password", requestParams[3]);
                 request.put("currency", requestParams[4]);
@@ -33,7 +33,7 @@ public class Marshaller {
             case "1": {
                 System.out.println("Marshalling Close Account Request");
                 request.put("requestType", requestParams[0]);
-                request.put("uid", requestParams[1]);
+                request.put("requestId", requestParams[1]);
                 request.put("accountName", requestParams[2]);
                 request.put("accountNumber", requestParams[3]);
                 request.put("password", requestParams[4]);
@@ -44,7 +44,7 @@ public class Marshaller {
             case "2":
                 System.out.println("Marshalling Deposit Money Request");
                 request.put("requestType", requestParams[0]);
-                request.put("uid", requestParams[1]);
+                request.put("requestId", requestParams[1]);
                 request.put("accountName", requestParams[2]);
                 request.put("accountNumber", requestParams[3]);
                 request.put("password", requestParams[4]);
@@ -56,7 +56,7 @@ public class Marshaller {
             case "3":
                 System.out.println("Marshalling Withdraw Money Request");
                 request.put("requestType", requestParams[0]);
-                request.put("uid", requestParams[1]);
+                request.put("requestId", requestParams[1]);
                 request.put("accountName", requestParams[2]);
                 request.put("accountNumber", requestParams[3]);
                 request.put("password", requestParams[4]);
@@ -68,7 +68,7 @@ public class Marshaller {
             case "4":
                 System.out.println("Marshalling Broadcast Account Update Request");
                 request.put("requestType", requestParams[0]);
-                request.put("uid", requestParams[1]);
+                request.put("requestId", requestParams[1]);
                 request.put("accountName", requestParams[2]);
                 request.put("accountNumber", requestParams[3]);
                 request.put("password", requestParams[4]);
@@ -79,7 +79,7 @@ public class Marshaller {
             case "5":
                 System.out.println("Marshalling Transfer Money Request");
                 request.put("requestType", requestParams[0]);
-                request.put("uid", requestParams[1]);
+                request.put("requestId", requestParams[1]);
                 request.put("accountName", requestParams[2]);
                 request.put("accountNumber", requestParams[3]);
                 request.put("password", requestParams[4]);
@@ -93,7 +93,7 @@ public class Marshaller {
             case "6":
                 System.out.println("Marshalling Check Account Balance Request");
                 request.put("requestType", requestParams[0]);
-                request.put("uid", requestParams[1]);
+                request.put("requestId", requestParams[1]);
                 request.put("accountName", requestParams[2]);
                 request.put("accountNumber", requestParams[3]);
                 request.put("password", requestParams[4]);
@@ -107,7 +107,7 @@ public class Marshaller {
     }
 
     public static byte[] marshall(HashMap<String, String> replyParams) {
-        String[] reply = { replyParams.get("uid"), replyParams.get("status"), replyParams.get("message") };
+        String[] reply = { replyParams.get("requestId"), replyParams.get("status"), replyParams.get("message") };
         String joinedReply = String.join("|", reply);
         return joinedReply.getBytes();
     };

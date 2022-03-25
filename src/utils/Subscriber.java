@@ -6,7 +6,20 @@ import java.time.LocalDateTime;
 public class Subscriber {
 
     private InetAddress ipAddress;
-    int port;
-    LocalDateTime expireTime;
+    private int port;
+    private LocalDateTime expireTime;
 
+    public Subscriber(InetAddress ipAddress, int port, long monitorInterval) {
+        this.ipAddress = ipAddress;
+        this.port = port;
+        this.expireTime = LocalDateTime.now().plusSeconds(monitorInterval);
+    }
+
+    public InetAddress getIpAddress() {
+        return ipAddress;
+    }
+
+    public int getPort() {
+        return port;
+    }
 }
