@@ -14,9 +14,9 @@ class MessageType(Enum):
 class ServiceType(Enum):
     OPEN_ACCOUNT = '0'
     CLOSE_ACCOUNT = '1'
-    SUBSCRIBE_UPDATES = '2'
-    DEPOSIT_MONEY = '3'
-    WITHDRAW_MONEY = '4'
+    DEPOSIT_MONEY = '2'
+    WITHDRAW_MONEY = '3'
+    SUBSCRIBE_UPDATES = '4'
     CHECK_BALANCE = '5'
     TRANSFER_MONEY = '6'
 
