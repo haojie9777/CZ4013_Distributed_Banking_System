@@ -209,9 +209,9 @@ server start -> create a handler -> handler class creates accountManager class
 
 - [x] Open account
 - [ ] Close account
-- [ ] Deposit
+- [x] Deposit
 - [ ] Withdraw
 - [ ] Broadcast update to subscribers
 - [x] (Idempotent) Check account balance
 - [ ] (Non-idempotent) Transfer money
-- [ ] Password to be fixed length
+- [x] Password to be fixed length
