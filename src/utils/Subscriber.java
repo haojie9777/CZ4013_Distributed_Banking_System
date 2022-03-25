@@ -22,4 +22,8 @@ public class Subscriber {
     public int getPort() {
         return port;
     }
+
+    public LocalDateTime getExpireTime() {
+        return expireTime;
+    }
 }
