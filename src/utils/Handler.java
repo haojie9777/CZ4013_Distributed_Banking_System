@@ -1,5 +1,6 @@
 package utils;
 
+import Bank.Account;
 import Bank.AccountManager;
 
 import java.util.HashMap;
@@ -25,7 +26,7 @@ public class Handler {
                 System.out.println("Opening Account");
                 String accountName = request.get("accountName");
                 String password = request.get("password");
-                String currency = request.get("currency");
+                Account.Currency currency = Account.Currency.valueOf(request.get("currency"));
                 float initialBalance = Float.parseFloat(request.get("initialBalance"));
                 int newAccountNum = accountManager.openAccount(accountName, password, currency, initialBalance);
                 message = "Account successfully opened with account number of "+String.valueOf((newAccountNum));
@@ -80,7 +81,7 @@ public class Handler {
                 String accountName = request.get("accountName");
                 int accountNumber = Integer.parseInt(request.get("accountNumber"));
                 String password = request.get("password");
-                String currency = request.get("currency");
+                Account.Currency currency = Account.Currency.valueOf(request.get("currency"));
                 float amount = Float.parseFloat(request.get("amount"));
 
                 float newBalance = accountManager.withdrawAccount(accountNumber, accountName, password, currency, amount);
