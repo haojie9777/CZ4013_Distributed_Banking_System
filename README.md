@@ -190,6 +190,7 @@ server start -> create a handler -> handler class creates accountManager class
 - [ ] Fault tolerance
 - [x] Set currency to enum type
 - [ ] Auto currency deposit
+#### Marshall Class
 
 #### Bank Class
 
@@ -197,7 +198,7 @@ server start -> create a handler -> handler class creates accountManager class
 - [x] Close account
 - [x] Deposit
 - [x] Withdraw
-- [ ] Broadcast update to subscribers
+- [ ] callback function to notify subscribers after every service
 - [x] (Idempotent) Check account balance
 - [ ] (Non-idempotent) Transfer money
 
