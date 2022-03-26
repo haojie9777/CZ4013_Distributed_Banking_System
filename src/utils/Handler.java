@@ -3,6 +3,8 @@ package utils;
 import Bank.Account;
 import Bank.AccountManager;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 
 public class Handler {
@@ -10,12 +12,14 @@ public class Handler {
      * process request from clients depending on the service type
      */
     private AccountManager accountManager = null;
+    private SubscriptionService subscriptionService = null;
 
     public Handler() {
         accountManager = new AccountManager(); //initialize accountManager object for this runtime
+        subscriptionService = new SubscriptionService();
 
     }
-    public HashMap<String,String> handleRequest(HashMap<String, String> request){
+    public HashMap<String,String> handleRequest(HashMap<String, String> request) throws UnknownHostException {
         String requestType = request.get("requestType");
         String requestId = request.get("requestId");
         String status = "1";
@@ -102,9 +106,13 @@ public class Handler {
                 }
                 break;
             }
-            //TODO
-            case "4": {
 
+            case "4": {
+                System.out.println("Subscribing to monitor updates to the server");
+                InetAddress requestIp = InetAddress.getByName(request.get("requestIp"));
+                long monitorInterval = Long.valueOf(request.get("monitorInterval"));
+                int requestPort = Integer.valueOf(request.get("requestPort"));
+                subscriptionService.addSubscriber(requestIp, requestPort, monitorInterval);
             }
         }
         reply.put("requestId",requestId);

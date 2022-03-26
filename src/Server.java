@@ -5,9 +5,9 @@ import utils.*;
 public class Server {
 
     public static void main(String[] args) throws IOException {
-        System.out.println("Running Server...");
+        System.out.println("Running IDamNerd Bank's Server...");
         //ask user for semantics to use: at-least-once or at-most-once
-        boolean atLeastOnce = true;
+        boolean atMostOnce = true;
 
         DatagramSocket aSocket = new DatagramSocket(6789);
         byte[] receivedBuffer = new byte[65535];
@@ -21,17 +21,22 @@ public class Server {
             //receive new request from a client
             request = new DatagramPacket(receivedBuffer,receivedBuffer.length );
             aSocket.receive(request); //blocked here if no request
+
             //unmarshall request
             HashMap<String, String> unmarshalledRequest = Marshaller.unmarshall(receivedBuffer);
 
+            //get ip and port of request for subscribing needs
+            unmarshalledRequest.put("requestIp", request.getAddress().toString());
+            unmarshalledRequest.put("requestPort",Integer.toString(request.getPort()));
+
             String requestId = unmarshalledRequest.get("requestId");
-            if (atLeastOnce && history.requestExists(requestId)){ //check for duplicated request if using at-most-once semantics
+            if (atMostOnce && history.requestExists(requestId)){ //send cached reply to client
                     byte[] marshalledResponse = history.getReply(requestId);
                     //send response to client
                     DatagramPacket reply = new DatagramPacket(marshalledResponse, marshalledResponse.length, request.getAddress(), request.getPort());
                     aSocket.send(reply);
                 }
-            else{
+            else{//service brand new request
                 HashMap<String, String> response = handler.handleRequest(unmarshalledRequest);  //service request
                 System.out.println(response);
                 byte[] marshalledResponse = Marshaller.marshall(response); //marshall response
