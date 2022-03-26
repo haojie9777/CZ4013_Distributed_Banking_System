@@ -58,7 +58,7 @@ public class Handler {
                 String accountName = request.get("accountName");
                 int accountNumber = Integer.parseInt(request.get("accountNumber"));
                 String password = request.get("password");
-                String currency = request.get("currency");
+                Account.Currency currency = Account.Currency.valueOf(request.get("currency"));
                 float amount = Float.parseFloat(request.get("amount"));
 
                 float newBalance = accountManager.depositAccount(accountNumber, accountName, password, currency, amount);
