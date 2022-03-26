@@ -113,10 +113,6 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 | Params           | Type  |
 | ---------------- | ----- |
-| requestId        | `str` |
-| Account Name     | `str` |
-| Account Number   | `int` |
-| Password         | `str` |
 | Monitor interval | `int` |
 
 #### Response
