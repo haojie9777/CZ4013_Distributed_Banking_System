@@ -102,28 +102,3 @@ def print_timetable(days: List[str], avail_by_days: List[str],
     if new_line_at_end:
         print()
 
-
-def print_booking(booking_id: str, facility_name: str, start_day: str, start_time: str, end_day: str, end_time: str,
-                  new_line_at_top: bool = True, new_line_at_end: bool = True) -> None:
-    """
-    Print a booking information
-    :param booking_id: id of the booking
-    :param facility_name: name of the booked facility
-    :param start_day: starting day of the booking
-    :param start_time: starting time of the booking
-    :param end_day: ending day of the booking
-    :param end_time: ending time of the booking
-    :param new_line_at_top: extra new line before printing the timetable
-    :param new_line_at_end: extra new line after printing the timetable
-    :return:
-    """
-    if new_line_at_top:
-        print()
-    print_message(f'Booking Information For {inline_important_message_decorator(booking_id)}')
-    print_options([
-        f'Facility Name: {facility_name}',
-        f'Start Time: {start_day} {start_time}',
-        f'End Time: {end_day} {end_time}'
-    ], show_number=False)
-    if new_line_at_end:
-        print()

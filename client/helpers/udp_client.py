@@ -1,13 +1,13 @@
 from time import time
 import socket
-from typing import Union, Callable
+from typing import Callable
 import random
 
 from configs import *
 from utils import *
 
 
-def get_free_port():
+def get_port():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.bind(("", 0))
     s.listen(1)
@@ -21,7 +21,7 @@ class UDPClientSocket:
     This is a UDP client that the program uses to send and listen messages
     """
     UDPSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
-    UDPSocket.bind((CLIENT_IP, CLIENT_PORT if CLIENT_PORT is not None else get_free_port()))
+    UDPSocket.bind((CLIENT_IP, CLIENT_PORT if CLIENT_PORT is not None else get_port()))
     serverAddressPort = (SERVER_IP, SERVER_PORT)
 
     @classmethod
@@ -46,8 +46,7 @@ class UDPClientSocket:
                 cls.UDPSocket.settimeout(time_out)
                 attempt += 1
                 try:
-                    if not simulate_comm_omission_fail or\
-                            simulate_comm_omission_fail and random.randint(0, 9) != 0:
+                    if not simulate_comm_omission_fail:
                         cls.UDPSocket.sendto(msg, cls.serverAddressPort)
                     else:
                         print_warning("Simulated Packet Loss")

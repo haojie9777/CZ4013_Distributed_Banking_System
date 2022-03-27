@@ -20,26 +20,12 @@ class BaseController(ABC):
         """
         raise NotImplementedError
 
-    def show_message(self):
-        """
-        print the message to screen
-        :return:
-        """
-        print_message(self.message)
-
     def show_options(self):
         """
         print the menu to screen for the user to choose
         :return:
         """
         print_options(self.options)
-
-    def show_unordered_options(self):
-        """
-        print the menu to screen without number as prefix
-        :return:
-        """
-        print_options(self.options, show_number=False)
 
     def start(self, *args, **kwargs):
         """
@@ -49,6 +35,7 @@ class BaseController(ABC):
         :return:
         """
         while True:
+            print_message(self.message)
             i = self.enter(*args, **kwargs)
             if i == 0:
                 return

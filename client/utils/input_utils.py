@@ -50,47 +50,6 @@ def get_string_options(list_of_vals: List[str], msg='Please Indicate Your Choice
             print_warning("Invalid Input! Please Try Again.")
 
 
-def get_enum_options(list_of_vals: List[str], msg='Please Indicate Your Choice', separator=',',
-                     max_num_of_choice: int = None, min_num_of_choice: int = 0) -> List[str]:
-    """
-    Get a string option from the menu
-    :param list_of_vals: list of valid values
-    :param msg: message to be prompted for inputting
-    :param separator: separator to be used when getting multiple string values
-    :param max_num_of_choice: max number of input string values
-    :param min_num_of_choice: min number of input string values
-    :return: used input string values
-    """
-    list_of_vals = set(list_of_vals)
-    while True:
-        try:
-            user_input = input(prompt_message_decorator(msg if max_num_of_choice == 1 else f'{msg} '
-                                                                                           f'(Separate by "{separator}")'))
-            user_choices = [s.strip().title() for s in user_input.split(separator)]
-            if max_num_of_choice is not None and not (min_num_of_choice <= len(user_choices) <= max_num_of_choice):
-                raise ValueError
-            for c in user_choices:
-                if c not in list_of_vals:
-                    raise ValueError
-            return user_choices
-        except ValueError:
-            print_warning("Invalid Input! Please Try Again.")
-
-
-def get_time(msg='Please Indicate A Time In 24hrs Format (e.g. 07:30)') -> str:
-    """
-    Get a valid time in 24hr format
-    :param msg: message to be displayed
-    :return: user input time in string
-    """
-    while True:
-        user_input = input(prompt_message_decorator(msg)).strip()
-        if re.match(r'([01]?[0-9]|2[0-3]):[0-5][0-9]', user_input):
-            return user_input
-        else:
-            print_warning("Invalid Input! Please Try Again.")
-
-
 def get_string_input(msg=None, allow_none=False) -> str:
     """
     Get an arbitrary non-empty string input

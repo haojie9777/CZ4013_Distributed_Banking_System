@@ -1,7 +1,5 @@
-from datetime import datetime
 
 from controllers import BaseController
-from utils import *
 from helpers import *
 
 
@@ -12,17 +10,17 @@ class CheckAccountBalanceController(BaseController):
 
     def __init__(self):
         super().__init__()
-        self.ctrl_list = ['Back To Homepage', 'Other Services']
+        self.ctrl_list = ['Back To Homepage', 'Check balance again']
 
     @property
     def message(self):
-        return None
+        return 'Lets take a look at your balance:'
 
     @property
     def options(self):
         return None
 
-    def enter(self, *args, **kwargs) -> int:
+    def enter(self) -> int:
         account_name = get_string_input(f'Please indicate name')
         account_number = get_int_input(f'Please indicate account number')
         account_password = get_string_input(f'Please indicate password')

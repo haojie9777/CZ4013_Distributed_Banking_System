@@ -1,5 +1,5 @@
 from controllers import BaseController
-from utils import *
+
 from helpers import *
 
 
@@ -10,7 +10,7 @@ class SubscribeUpdatesController(BaseController):
 
     def __init__(self):
         super().__init__()
-        self.ctrl_list = ['Back To Homepage', 'Other Services']
+        self.ctrl_list = ['Back To Homepage', 'Subscribe again']
 
     @property
     def message(self):
@@ -24,8 +24,7 @@ class SubscribeUpdatesController(BaseController):
     def options(self, val):
         pass
 
-    def enter(self, *args, **kwargs) -> int:
-        self.show_message()
+    def enter(self) -> int:
         monitor_interval = get_int_input(f'Please indicate how long to monitor updates (in seconds)')
         self.handler(monitor_interval)
         print_options(self.ctrl_list)

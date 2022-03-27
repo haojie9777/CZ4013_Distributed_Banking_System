@@ -1,7 +1,7 @@
 from typing import Callable, Union
-import struct
+
 from helpers import UDPClientSocket
-from utils import ServiceType, CallMessage, ReplyMessage, OneWayMessage, ExceptionMessage, create_validation_code
+from utils import ServiceType, CallMessage, ReplyMessage, OneWayMessage, ExceptionMessage
 
 
 def request(service: ServiceType, *args, **kwargs) -> Union[ReplyMessage, OneWayMessage, ExceptionMessage]:

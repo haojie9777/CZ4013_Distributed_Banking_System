@@ -1,6 +1,5 @@
 
 from controllers import BaseController
-from utils import *
 from helpers import *
 
 
@@ -11,7 +10,7 @@ class CloseAccountController(BaseController):
 
     def __init__(self):
         super().__init__()
-        self.ctrl_list = ['Back To Homepage', 'Other Services']
+        self.ctrl_list = ['Back To Homepage', 'Close another account']
 
     @property
     def message(self):
@@ -25,8 +24,7 @@ class CloseAccountController(BaseController):
     def options(self, val):
         pass
 
-    def enter(self, *args, **kwargs) -> int:
-        self.show_message()
+    def enter(self) -> int:
         account_name = get_string_input(f'Please indicate name')
         account_number = get_int_input(f'Please indicate account number')
         account_password = get_string_input(f'Please indicate password')

@@ -1,7 +1,5 @@
-from datetime import datetime
 
 from controllers import BaseController
-from utils import *
 from helpers import *
 
 
@@ -19,7 +17,7 @@ class OpenAccountController(BaseController):
     def __init__(self):
         super().__init__()
         self.currency_list = []
-        self.ctrl_list = ['Back To Homepage', 'Other Services']
+        self.ctrl_list = ['Back To Homepage', 'Open another account']
         for currency in CurrencyType:
             self.currency_list.append(currency.name)
 
@@ -35,8 +33,7 @@ class OpenAccountController(BaseController):
     def options(self, val):
         pass
 
-    def enter(self, *args, **kwargs) -> int:
-        self.show_message()
+    def enter(self) -> int:
         account_name = get_string_input(f'Please indicate name')
         account_password = get_string_input(f'Please indicate password, only input 6 characters')
         print_options(self.options, show_number=True)

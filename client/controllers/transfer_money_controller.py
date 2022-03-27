@@ -1,5 +1,5 @@
 from controllers import BaseController
-from utils import *
+
 from helpers import *
 
 
@@ -17,7 +17,7 @@ class TransferMoneyController(BaseController):
     def __init__(self):
         super().__init__()
         self.currency_list = []
-        self.ctrl_list = ['Back To Homepage', 'Other Services']
+        self.ctrl_list = ['Back To Homepage', 'Transfer Money to another account']
         for currency in CurrencyType:
             self.currency_list.append(currency.name)
 
@@ -33,8 +33,7 @@ class TransferMoneyController(BaseController):
     def options(self, val):
         pass
 
-    def enter(self, *args, **kwargs) -> int:
-        self.show_message()
+    def enter(self) -> int:
         account_name = get_string_input(f'Please indicate your name')
         account_number = get_int_input(f'Please indicate account number')
         account_password = get_string_input(f'Please indicate password')
