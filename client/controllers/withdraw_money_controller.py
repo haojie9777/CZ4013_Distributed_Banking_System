@@ -79,7 +79,7 @@ class WithdrawMoneyController(BaseController):
         :return: reply message from server
         """
         reply_msg = request(ServiceType.WITHDRAW_MONEY, account_name, str(account_number), account_password,
-                            account_currencyType.value, str(withdraw_amount))
+                            account_currencyType.value, '%.2f' % withdraw_amount)
         if reply_msg.msg_type == MessageType.EXCEPTION:
             raise Exception(reply_msg.error_msg)
         return reply_msg.data

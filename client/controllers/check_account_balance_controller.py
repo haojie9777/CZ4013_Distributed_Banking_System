@@ -56,8 +56,6 @@ class CheckAccountBalanceController(BaseController):
         :return: reply message from server
         """
         reply_msg = request(ServiceType.OPEN_ACCOUNT, account_name, str(account_number), account_password)
+        if reply_msg.msg_type == MessageType.EXCEPTION:
+            raise Exception(reply_msg.error_msg)
         return reply_msg.data
-
-        # if facility_name == 'test error':
-        #     raise Exception('Facility Is Not Included In The System!')
-        # return ["00:00-13:10;14:50-21:00;21:00-23:59" for _ in chosen_days]

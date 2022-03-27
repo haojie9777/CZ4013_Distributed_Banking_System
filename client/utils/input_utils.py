@@ -106,26 +106,6 @@ def get_float_input(msg=None, min_val=0, max_val=float('inf')) -> float:
             print_warning(f"Invalid Input! Your Input Should Be A Float From {min_val} to {max_val}.")
 
 
-def get_confirmation_id(msg="Please Input Your Confirmation ID With Dashes (Case Insensitive)",
-                        to_lower_case=True) -> str:
-    """
-    Get an valid UUID4
-    :param msg: message to be displayed
-    :param to_lower_case: convert user input string to lower case
-    :return: user input UUID4 string
-    """
-    while True:
-        try:
-            user_input = input(prompt_message_decorator(msg)).strip().lower()
-            if re.match(r"^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$", user_input):
-                return user_input
-            else:
-                raise ValueError
-        except ValueError:
-            print_warning("Invalid Input! Please Try Again. Confirmation ID Should Be "
-                          "36 Characters With Dashes Included.")
-
-
 def get_time_period(msg_suffix: str = None, precision='seconds') -> int:
     """
     Get a period of time

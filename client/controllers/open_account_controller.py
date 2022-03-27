@@ -84,7 +84,7 @@ class OpenAccountController(BaseController):
         :return: reply message from server
         """
         reply_msg = request(ServiceType.OPEN_ACCOUNT, account_name, account_password, account_currencyType.value,
-                            str(account_balance))
+                            '%.2f' % account_balance)
         if reply_msg.msg_type == MessageType.EXCEPTION:
             raise Exception(reply_msg.error_msg)
         return reply_msg.data
