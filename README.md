@@ -113,10 +113,6 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 | Params           | Type  |
 | ---------------- | ----- |
-| requestId        | `str` |
-| Account Name     | `str` |
-| Account Number   | `int` |
-| Password         | `str` |
 | Monitor interval | `int` |
 
 #### Response
@@ -192,8 +188,9 @@ server start -> create a handler -> handler class creates accountManager class
 - [x] At-most-once semantics (specify semantics as argument when starting server)
 - [ ] Simulate loss of request and reply
 - [ ] Fault tolerance
-- [ ] Set currency to enum type
+- [x] Set currency to enum type
 - [ ] Auto currency deposit
+#### Marshall Class
 
 #### Bank Class
 
@@ -201,7 +198,7 @@ server start -> create a handler -> handler class creates accountManager class
 - [x] Close account
 - [x] Deposit
 - [x] Withdraw
-- [ ] Broadcast update to subscribers
+- [ ] callback function to notify subscribers after every service
 - [x] (Idempotent) Check account balance
 - [ ] (Non-idempotent) Transfer money
 
@@ -209,9 +206,9 @@ server start -> create a handler -> handler class creates accountManager class
 
 - [x] Open account
 - [ ] Close account
-- [ ] Deposit
+- [x] Deposit
 - [ ] Withdraw
 - [ ] Broadcast update to subscribers
 - [x] (Idempotent) Check account balance
 - [ ] (Non-idempotent) Transfer money
-- [ ] Password to be fixed length
+- [x] Password to be fixed length

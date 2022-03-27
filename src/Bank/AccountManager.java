@@ -9,22 +9,15 @@ public class AccountManager {
     //increment by 10 for every account generated
     private int nextAccountNumber = 1000000100;
 
-    //enum of currencies
-    private enum Currencies {
-        SGD,
-        USD,
-        MYR
-    }
-
     public AccountManager() {
     }
 
     //open new account
-    public int openAccount(String name, String password, String currencyType, float balance) {
+    public int openAccount(String name, String password, Account.Currency currency, float balance) {
         int newAccountNum = nextAccountNumber;
         nextAccountNumber += 100; //increment account number for the next account
 
-        Account newAccount = new Account(newAccountNum, name, password, currencyType, balance);
+        Account newAccount = new Account(newAccountNum, name, password, currency, balance);
         accountsHashMap.put(newAccountNum,newAccount);
 
         return newAccountNum;
@@ -52,7 +45,7 @@ public class AccountManager {
         return accountsHashMap;
     }
 
-    public float depositAccount(int accountNumber, String name, String password, String currencyType, float amount){
+    public float depositAccount(int accountNumber, String name, String password, Account.Currency currency, float amount){
         Account account = accountsHashMap.get(accountNumber);
         if (account == null){
             return -1;
@@ -68,7 +61,7 @@ public class AccountManager {
             }
         }
     }
-    public float withdrawAccount(int accountNumber,String name ,String password, String currencyType, float amount){
+    public float withdrawAccount(int accountNumber,String name ,String password, Account.Currency currency, float amount){
         Account account = accountsHashMap.get(accountNumber);
         if (account == null){
             return -1;
