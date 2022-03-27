@@ -1,7 +1,6 @@
 from time import time
 import socket
 from typing import Callable
-import random
 
 from configs import *
 from utils import *

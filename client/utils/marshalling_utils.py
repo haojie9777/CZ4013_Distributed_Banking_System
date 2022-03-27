@@ -61,34 +61,6 @@ class CallMessage(BaseMessage):
             msg_in_bytes += bytes(a.encode('ascii')) + bytes("|".encode('ascii'))
         return msg_in_bytes
 
-    @classmethod
-    def _serialize_data(cls, a) -> bytes:
-        # Currently unused would normally be called in line 54
-        """
-        Marshall a field of data to bytes
-        :param a: data to be serialized
-        :return: serialized data in bytes
-        """
-        type_a = str
-        serialized_form = type_to_hex[type_a]
-
-        if type_a is int:
-            serialized_form += struct.pack('<i', a)
-        elif type_a is float:
-            serialized_form += struct.pack('<f', a)
-        elif type_a is bool:
-            serialized_form += struct.pack('<b', a)
-        elif type_a is str:
-            serialized_form += bytes(a.encode('ascii'))
-        elif type_a is list:
-            inner_type = type(a[0])
-            serialized_inner_data = bytearray()
-            for inner_a in a:
-                serialized_inner_data += cls._serialize_data(inner_a)[1:]  # type is not needed
-            serialized_form += type_to_hex[inner_type] + struct.pack('<i', len(a)) + serialized_inner_data
-
-        return serialized_form
-
 
 class ReplyMessage(BaseMessage):
     """
@@ -149,55 +121,7 @@ def unmarshall(data: bytes) -> Union[ReplyMessage, OneWayMessage, ExceptionMessa
     elif message_status == '1':
         return ReplyMessage(request_id=request_id, data=decoded_data_list[2])
     else:
-        raise TypeError('Unexpected Message Of Type CALL Received!')
-
-
-def parse_data(data: bytes, ptr: int) -> list:
-    """
-    Method used to unmarshall the Argument part from bytes by forwarding pointers
-    :param data: raw data in bytes
-    :param ptr: starting position of the Argument part
-    :return:
-    """
-    parsed_data = []
-    while ptr <= len(data) - 2:
-        data_type = data[ptr]
-        ptr += 1
-        if data_type == 4:  # TODO nested lists are not supported
-            inner_type = data[ptr]
-            ptr += 1
-            length, ptr_shift = _parse_data_with_type(data, ptr, 0)
-            ptr += ptr_shift
-            list_data = []
-            for i in range(length):
-                parsed_field, ptr_shift = _parse_data_with_type(data, ptr, inner_type)
-                list_data.append(parsed_field)
-                ptr += ptr_shift
-            parsed_data.append(list_data)
-        else:
-            parsed_field, ptr_shift = _parse_data_with_type(data, ptr, data_type)
-            parsed_data.append(parsed_field)
-            ptr += ptr_shift
-    return parsed_data
-
-
-def _parse_data_with_type(data, ptr, data_type):
-    """
-    Method used to parse one data field
-    :param data: raw data in bytes
-    :param ptr: current position of the pointer
-    :param data_type: type of the data to be unmarshalled
-    :return: unmarshalled data and pointer shift
-    """
-    if data_type == 0:
-        return struct.unpack('<i', data[ptr:ptr + 4])[0], 4
-    elif data_type == 1:
-        return struct.unpack('<f', data[ptr:ptr + 4])[0], 4
-    elif data_type == 2:
-        length = struct.unpack('<i', data[ptr:ptr + 4])[0]
-        return data[ptr + 4:ptr + 4 + length].decode('ascii'), 4 + length
-    elif data_type == 3:
-        return struct.unpack('<b', data[ptr:ptr + 1]), 1
+        raise TypeError(f"Unexpected Message Of Type {message_status} Received!")
 
 
 if __name__ == '__main__':

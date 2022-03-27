@@ -76,7 +76,7 @@ class DepositMoneyController(BaseController):
         :param account_name: account name of client
         :return: reply message from server
         """
-        reply_msg = request(ServiceType.DEPOSIT_MONEY, account_name, str(account_number), account_password, account_currencyType.value, str(deposit_amount))
+        reply_msg = request(ServiceType.DEPOSIT_MONEY, account_name, str(account_number), account_password, account_currencyType.value, '%.2f' % deposit_amount)
         if reply_msg.msg_type == MessageType.EXCEPTION:
             raise Exception(reply_msg.error_msg)
         return reply_msg.data
