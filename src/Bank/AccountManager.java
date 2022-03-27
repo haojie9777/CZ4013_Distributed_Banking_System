@@ -30,7 +30,7 @@ public class AccountManager {
             return -1;
         }
         else{
-            if (name == account.getName() && password == account.getPassword()){
+            if (name.equals(account.getName()) && password.equals(account.getPassword())){
                 accountsHashMap.remove(accountNumber);
                 return 1;
             }

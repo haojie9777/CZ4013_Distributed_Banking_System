@@ -59,8 +59,8 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 #### Response
 
-| Params  | Type  |
-| ------- | ----- |
+| Params    | Type  |
+| --------- | ----- |
 | requestId | `str` |
 | Status    | `int` |
 | Message   | `str` |
@@ -117,11 +117,11 @@ For now, we use Ack to return '1' for success, '0' for error, then message to re
 
 #### Response
 
-| Params      | Type  |
-| -------     | ----- |
-| requestId   | `str` |
-| Status      | `int` |
-| Message     | `str` |
+| Params    | Type  |
+| --------- | ----- |
+| requestId | `str` |
+| Status    | `int` |
+| Message   | `str` |
 
 ### Transfer Money (request 5)
 
@@ -189,7 +189,8 @@ server start -> create a handler -> handler class creates accountManager class
 - [ ] Simulate loss of request and reply
 - [ ] Fault tolerance
 - [x] Set currency to enum type
-- [ ] Auto currency deposit
+- [ ] Auto currency convert
+
 #### Marshall Class
 
 #### Bank Class
@@ -199,15 +200,15 @@ server start -> create a handler -> handler class creates accountManager class
 - [x] Deposit
 - [x] Withdraw
 - [ ] callback function to notify subscribers after every service
-- [x] (Idempotent) Check account balance
+- [ ] (Idempotent) Check account balance
 - [ ] (Non-idempotent) Transfer money
 
 ### Client (Python)
 
 - [x] Open account
-- [ ] Close account
+- [x] Close account
 - [x] Deposit
-- [ ] Withdraw
+- [x] Withdraw
 - [ ] Broadcast update to subscribers
 - [x] (Idempotent) Check account balance
 - [ ] (Non-idempotent) Transfer money
