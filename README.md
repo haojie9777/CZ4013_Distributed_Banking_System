@@ -189,7 +189,7 @@ server start -> create a handler -> handler class creates accountManager class
 - [ ] Simulate loss of request and reply
 - [ ] Fault tolerance
 - [x] Set currency to enum type
-- [ ] Auto currency convert
+- [x] Auto currency convert
 
 #### Marshall Class
 

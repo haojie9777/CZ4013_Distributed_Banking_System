@@ -1,4 +1,6 @@
 package Bank;
+import utils.CurrencyConverter;
+
 import java.util.HashMap;
 
 //controller class for accounts
@@ -45,14 +47,15 @@ public class AccountManager {
         return accountsHashMap;
     }
 
-    public float depositAccount(int accountNumber, String name, String password, Account.Currency currency, float amount){
+    public float depositAccount(int accountNumber, String name, String password, Account.Currency requestCurrency, float amount){
         Account account = accountsHashMap.get(accountNumber);
         if (account == null){
             return -1;
         }
         else{
             if (name.equals(account.getName()) && password.equals(account.getPassword())){
-                account.setBalance(account.getBalance() + amount);
+                float convertedAmount = CurrencyConverter.convertCurrency(amount, requestCurrency, account.getCurrencyType());
+                account.setBalance(account.getBalance() + convertedAmount);
                 accountsHashMap.put(accountNumber, account);
                 return account.getBalance();
             }
@@ -61,14 +64,15 @@ public class AccountManager {
             }
         }
     }
-    public float withdrawAccount(int accountNumber,String name ,String password, Account.Currency currency, float amount){
+    public float withdrawAccount(int accountNumber,String name ,String password, Account.Currency requestCurrency, float amount){
         Account account = accountsHashMap.get(accountNumber);
         if (account == null){
             return -1;
         }
         else{
             if (name.equals(account.getName()) && password.equals(account.getPassword())){
-                float newBalance = account.getBalance() -amount;
+                float convertedAmount = CurrencyConverter.convertCurrency(amount, requestCurrency, account.getCurrencyType());
+                float newBalance = account.getBalance() - convertedAmount;
                 if (newBalance >= 0){
                     account.setBalance(account.getBalance() - amount);
                     accountsHashMap.put(accountNumber, account);
