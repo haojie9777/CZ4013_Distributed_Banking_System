@@ -89,7 +89,7 @@ class UDPClientSocket:
         :param subscribe_time: time to listen in seconds
         :param subscription_id: expected id of the message from server
         :param call_back_function: function to execute upon receiving a valid message
-        :param buffer_size: maximun size of the expected reply
+        :param buffer_size: maximum size of the expected reply
         :return: 
         """
         end_time = time() + subscribe_time
@@ -101,15 +101,12 @@ class UDPClientSocket:
                 end = time()
 
                 if addr == cls.serverAddressPort:
-                    stated_code = struct.unpack('<I', data[0:4])[0]
-                    if verify_validation_code(stated_code, data[4:]):
-                        reply_message = unmarshall(data[4:])
-                        if reply_message.request_id == subscription_id:
-                            call_back_function(reply_message)
-                        else:
-                            print_warning('Unexpected Message From Server Detected! Discarding...')
+                    reply_message = unmarshall(data)
+                    if reply_message.request_id == subscription_id:
+                        call_back_function(reply_message)
                     else:
-                        print_warning("Validation Failed! Corrupted Message Detected! Discarding...")
+                        print_warning('Unexpected Message From Server Detected! Discarding...')
+
                 else:
                     print_warning(f'Unexpected External Message From {addr} Detected! Discarding...')
 

@@ -123,10 +123,9 @@ class OneWayMessage(ReplyMessage):
         self.service = service
 
     def marshall(self) -> bytearray:
-        msg_in_bytes = bytearray(self.msg_type.value)
-        msg_in_bytes += bytes(self.request_id.encode('ascii'))
-        msg_in_bytes += struct.pack('B', len(self.service.value))
-        msg_in_bytes += bytes(self.service.value.encode('ascii'))
+        msg_in_bytes = bytearray(self.service.value.encode('ascii'))
+        # msg_in_bytes += struct.pack('B', len(self.service.value))
+        msg_in_bytes += bytes("|".encode('ascii')) + bytes(self.request_id.encode('ascii'))
         return msg_in_bytes
 
 
@@ -134,9 +133,8 @@ def unmarshall(data: bytes) -> Union[ReplyMessage, OneWayMessage, ExceptionMessa
     """
     Unmarshall a message in bytes to one of the predefined UDP mesage types
     :param data: raw data in bytes
-    :return: A UDP message of type REPLY, ONEWAY or EXCEPTION
+    :return: A UDP message of type REPLY or EXCEPTION
     """
-    ptr = 0
     decoded_data = data.decode('ascii')
     print(decoded_data)
     decoded_data_list = decoded_data.split('|')

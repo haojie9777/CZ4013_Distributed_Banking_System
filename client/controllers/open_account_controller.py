@@ -19,7 +19,7 @@ class OpenAccountController(BaseController):
     def __init__(self):
         super().__init__()
         self.currency_list = []
-        self.ctrl_list = ['Back To Homepage', 'Make Another Booking']
+        self.ctrl_list = ['Back To Homepage', 'Other Services']
         for currency in CurrencyType:
             self.currency_list.append(currency.name)
 
@@ -39,7 +39,7 @@ class OpenAccountController(BaseController):
         self.show_message()
         account_name = get_string_input(f'Please indicate name')
         account_password = get_string_input(f'Please indicate password, only input 6 characters')
-        print_options(self.options, show_number=False)
+        print_options(self.options, show_number=True)
         account_currencyType_choice = get_menu_option(max_choice=len(self.currency_list),
                                                       msg='Please indicate account currency',
                                                       min_choice=0)
@@ -53,10 +53,10 @@ class OpenAccountController(BaseController):
                 account_balance: float):
         """
         This handles the input from the users by logging hint information and make requests to the server
-        :param account_balance:
-        :param account_password:
-        :param account_name:
-        :param account_currencyType:
+        :param account_balance: starting balance in client account
+        :param account_currencyType: currency type of client account
+        :param account_password: password to set for client account
+        :param account_name: name to set for client account
         :return:
         """
         try:
@@ -70,8 +70,8 @@ class OpenAccountController(BaseController):
 
     def _check_password_isalnum(self, password: str) -> bool:
         """
-        This checks if the starting time and ending time are valid
-        :return:
+        This checks if the password is alphanumeric
+        :return: boolean
         """
         return password.isalnum()
 
@@ -80,11 +80,11 @@ class OpenAccountController(BaseController):
                      account_balance: float) -> str:
         """
         This makes request to the server to book the facility
-        :param account_balance:
-        :param account_currencyType:
-        :param account_password:
-        :param account_name:
-        :return: an unique booking ID
+        :param account_balance: starting balance in client account
+        :param account_currencyType: currency type of client account
+        :param account_password: password to set for client account
+        :param account_name: name to set for client account
+        :return: reply message from server
         """
         reply_msg = request(ServiceType.OPEN_ACCOUNT, account_name, account_password, account_currencyType.value,
                             str(account_balance))

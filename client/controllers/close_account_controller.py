@@ -6,12 +6,12 @@ from helpers import *
 
 class CloseAccountController(BaseController):
     """
-    This is the controller to open bank account
+    This is the controller to close bank account
     """
 
     def __init__(self):
         super().__init__()
-        self.ctrl_list = ['Back To Homepage', 'Make Another Booking']
+        self.ctrl_list = ['Back To Homepage', 'Other Services']
 
     @property
     def message(self):
@@ -37,26 +37,26 @@ class CloseAccountController(BaseController):
     def handler(self, account_name: str, account_number: int, account_password: str):
         """
         This handles the input from the users by logging hint information and make requests to the server
-        :param account_number: 
-        :param account_password:
-        :param account_name:
+        :param account_number: account number of client
+        :param account_password:account password of client
+        :param account_name: account name of client
         :return:
         """
         try:
             print_message("Closing account...")
             account_number = self.close_account(account_name, account_number, account_password)
-            print_message(msg=f'\nYour Have Successfully closed your account: {account_number}')
+            print_message(msg=f'\nYou have Successfully closed your account: {account_number}')
         except Exception as e:
             print_error(f'Open account failed: {str(e)}')
 
     @staticmethod
     def close_account(account_name: str, account_number: int, account_password: str) -> str:
         """
-        This makes request to the server to book the facility
-        :param account_number: 
-        :param account_password:
-        :param account_name:
-        :return: 
+        This makes request to the server to close stated account
+        :param account_number: account number of client
+        :param account_password:account password of client
+        :param account_name: account name of client
+        :return: reply message from server
         """
         reply_msg = request(ServiceType.CLOSE_ACCOUNT, account_name, str(account_number), account_password)
         if reply_msg.msg_type == MessageType.EXCEPTION:

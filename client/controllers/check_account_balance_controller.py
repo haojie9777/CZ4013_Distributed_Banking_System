@@ -7,12 +7,12 @@ from helpers import *
 
 class CheckAccountBalanceController(BaseController):
     """
-    This is the controller used to check the availability of an facility on particular days
+    This is the controller used to check account balance
     """
 
     def __init__(self):
         super().__init__()
-        self.ctrl_list = ['Back To Homepage', 'Make Another Query']
+        self.ctrl_list = ['Back To Homepage', 'Other Services']
 
     @property
     def message(self):
@@ -34,10 +34,10 @@ class CheckAccountBalanceController(BaseController):
     def handler(self, account_name: str, account_number: int, account_password: str):
         """
         This handles the input from the users by logging hint information and makes request to the server for
-        the availability check
-        :param account_password:
-        :param account_name:
-        :param account_number:
+        the checking account balance
+        :param account_number: account number of client
+        :param account_name: account name of client
+        :param account_password: account password of client
         :return:
         """
         print_message(f'Checking account balance...')
@@ -51,11 +51,11 @@ class CheckAccountBalanceController(BaseController):
     @staticmethod
     def retrieve_account_balance(account_name: str, account_number: int, account_password: str) -> str:
         """
-        This makes request to the server for the facility availability
-        :param account_number:
-        :param account_name:
-        :param account_password:
-        :return:
+        This makes request to the server for checking account balance
+        :param account_number: account number of client
+        :param account_name: account name of client
+        :param account_password: account password of client
+        :return: reply message from server
         """
         reply_msg = request(ServiceType.OPEN_ACCOUNT, account_name, str(account_number), account_password)
         return reply_msg.data

@@ -11,13 +11,13 @@ class CurrencyType(Enum):
 
 class WithdrawMoneyController(BaseController):
     """
-    This is the controller to open bank account
+    This is the controller to withdraw money from bank account
     """
 
     def __init__(self):
         super().__init__()
         self.currency_list = []
-        self.ctrl_list = ['Back To Homepage', 'Make Another Booking']
+        self.ctrl_list = ['Back To Homepage', 'Other Services']
         for currency in CurrencyType:
             self.currency_list.append(currency.name)
 
@@ -38,7 +38,7 @@ class WithdrawMoneyController(BaseController):
         account_name = get_string_input(f'Please indicate name')
         account_number = get_int_input(f'Please indicate account number')
         account_password = get_string_input(f'Please indicate password')
-        print_options(self.options, show_number=False)
+        print_options(self.options, show_number=True)
         account_currencyType_choice = get_menu_option(max_choice=len(self.currency_list),
                                                       msg='Please indicate account currency',
                                                       min_choice=0)
@@ -52,18 +52,18 @@ class WithdrawMoneyController(BaseController):
                 withdraw_amount: float):
         """
         This handles the input from the users by logging hint information and make requests to the server
-        :param withdraw_amount:
-        :param account_currencyType:
-        :param account_number:
-        :param account_password:
-        :param account_name:
+        :param withdraw_amount: amount of money to withdraw from client account
+        :param account_currencyType: currency type of money
+        :param account_number: account number of client
+        :param account_password: account password of client
+        :param account_name: account name of client
         :return:
         """
         try:
             print_message("Withdrawing money...")
             account_number = self.withdraw_money(account_name, account_number, account_password, account_currencyType,
                                                  withdraw_amount)
-            print_message(msg=f'\nYour Have withdrawn money from your account: {account_number}')
+            print_message(msg=f'\nYour have withdrawn money from your account: {account_number}')
         except Exception as e:
             print_error(f'Withdraw money failed: {str(e)}')
 
@@ -72,12 +72,13 @@ class WithdrawMoneyController(BaseController):
                        account_currencyType: CurrencyType,
                        withdraw_amount: float) -> str:
         """
-        This makes request to the server to book the facility
-        :param account_currencyType:
-        :param account_number:
-        :param account_password:
-        :param account_name:
-        :return: 
+        This makes request to the server to withdraw money
+        :param withdraw_amount: amount of money to withdraw from client account
+        :param account_currencyType: currency type of money
+        :param account_number: account number of client
+        :param account_password: account password of client
+        :param account_name: account name of client
+        :return: reply message from server
         """
         reply_msg = request(ServiceType.WITHDRAW_MONEY, account_name, str(account_number), account_password,
                             account_currencyType.value, str(withdraw_amount))

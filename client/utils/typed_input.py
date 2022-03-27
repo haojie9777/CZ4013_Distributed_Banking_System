@@ -49,8 +49,9 @@ def get_string_options(list_of_vals: List[str], msg='Please Indicate Your Choice
         except ValueError:
             print_warning("Invalid Input! Please Try Again.")
 
+
 def get_enum_options(list_of_vals: List[str], msg='Please Indicate Your Choice', separator=',',
-                       max_num_of_choice: int = None, min_num_of_choice: int = 0) -> List[str]:
+                     max_num_of_choice: int = None, min_num_of_choice: int = 0) -> List[str]:
     """
     Get a string option from the menu
     :param list_of_vals: list of valid values

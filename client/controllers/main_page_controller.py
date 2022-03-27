@@ -57,22 +57,6 @@ class MainPageController(BaseController):
             self.exit()
 
     @staticmethod
-    def retrieve_facility_name_list():
-        """
-        This retrieves the name list of all facilities from the server
-        :return: list of facility names
-        """
-        try:
-            reply_msg = request(service=ServiceType.FACILITY_NAMELIST_CHECKING)
-            if reply_msg.msg_type == MessageType.REPLY:
-                return reply_msg.data[0]
-            else:
-                raise Exception(reply_msg.error_msg)
-        except Exception as e:
-            print_error(f"Server Unavailable: {str(e)}. Please Try Again Later.")
-            sys.exit()
-
-    @staticmethod
     def exit():
         """
         Terminate the program
