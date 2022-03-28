@@ -187,7 +187,7 @@ server start -> create a handler -> handler class creates accountManager class
 - [x] At-least-once semantics (specify semantics as argument when starting server)
 - [x] At-most-once semantics (specify semantics as argument when starting server)
 - [ ] Simulate loss of request and reply
-- [ ] Fault tolerance
+- [x] Fault tolerance
 - [x] Set currency to enum type
 - [x] Auto currency convert
 
