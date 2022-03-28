@@ -12,7 +12,6 @@ public class Marshaller {
     public static HashMap<String, String> unmarshall(byte[] data) {
         String requestRaw = new String(data, StandardCharsets.UTF_8);
         String[] requestParams =  requestRaw.split("\\|");
-        System.out.println(Arrays.toString(requestParams));
         String requestType = requestParams[0];
 
         HashMap<String, String> request = new HashMap<String, String>();
@@ -25,7 +24,6 @@ public class Marshaller {
                 request.put("password", requestParams[3]);
                 request.put("currency", requestParams[4]);
                 request.put("initialBalance", requestParams[5]);
-                System.out.println(request);
 
                 return request;
 
