@@ -108,7 +108,6 @@ def unmarshall(data: bytes) -> Union[ReplyMessage, AckMessage, ExceptionMessage]
     :return: A UDP message of type REPLY or EXCEPTION
     """
     decoded_data = data.decode('ascii')
-    print(decoded_data)
     decoded_data_list = decoded_data.split('|')
     print(decoded_data_list)
     request_id = decoded_data_list[0]

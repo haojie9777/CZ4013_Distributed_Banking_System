@@ -68,6 +68,6 @@ class SubscribeUpdatesController(BaseController):
         if type(msg) is ExceptionMessage:
             print_error(f'Exception received From Server: {msg.error_msg}')
         else:
-            prompt_message_decorator(msg.data)
+            print_message(msg.data)
 
         #notify(service=ServiceType.SUBSCRIBE_UPDATES, request_id=msg.request_id)
