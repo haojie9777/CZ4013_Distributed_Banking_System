@@ -62,7 +62,7 @@ class CheckAccountBalanceController(BaseController):
         :param account_password: account password of client
         :return: reply message from server
         """
-        reply_msg = request(ServiceType.OPEN_ACCOUNT, account_name, str(account_number), account_password)
+        reply_msg = request(ServiceType.CHECK_BALANCE, account_name, str(account_number), account_password)
         if reply_msg.msg_type == MessageType.EXCEPTION:
             raise Exception(reply_msg.error_msg)
         return reply_msg.data
