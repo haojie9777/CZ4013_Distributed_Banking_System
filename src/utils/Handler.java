@@ -33,7 +33,7 @@ public class Handler {
                 Account.Currency currency = Account.Currency.valueOf(request.get("currency"));
                 float initialBalance = Float.parseFloat(request.get("initialBalance"));
                 int newAccountNum = accountManager.openAccount(accountName, password, currency, initialBalance);
-                message = "Account successfully opened with account number of "+String.valueOf((newAccountNum));
+                message = "Account successfully opened with account number of "+ newAccountNum;
                 System.out.println("Account successfully opened ");
                 break;
             }
@@ -75,7 +75,7 @@ public class Handler {
                     status = "0";
                 }
                 else {
-                    message = "New account balance = "+String.valueOf(newBalance);
+                    message = "New account balance = "+ newBalance;
                 }
                 break;
             }
@@ -113,6 +113,31 @@ public class Handler {
                 long monitorInterval = Long.valueOf(request.get("monitorInterval"));
                 int requestPort = Integer.valueOf(request.get("requestPort"));
                 subscriptionService.addSubscriber(requestIp, requestPort, monitorInterval);
+            }
+
+            case "5": {
+                System.out.println("Transferring money from one account to another");
+                break;
+            }
+            case "6" : {
+                System.out.println("Checking account balance");
+                String accountName = request.get("accountName");
+                int accountNumber = Integer.parseInt(request.get("accountNumber"));
+                String password = request.get("password");
+                float balance = accountManager.getAccountBalance(accountNumber, accountName, password);
+                if (balance == -1){
+                    message = "Account number not found";
+                    status = "0";
+                }
+                else if (balance == -2){
+                    message = "Wrong account name or password";
+                    status = "0";
+                }
+                else{
+                    message = "Account balance = "+ balance;
+                }
+
+                break;
             }
         }
         reply.put("requestId",requestId);
