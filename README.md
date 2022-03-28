@@ -200,9 +200,9 @@ server start -> create a handler -> handler class creates accountManager class
 - [x] Deposit
 - [x] Withdraw
 - [ ] callback function to notify subscribers after every service
-- [ ] (Idempotent) Check account balance
-- [ ] (Non-idempotent) Transfer money
-- [ ] Convert Currency for transfer money
+- [x] (Idempotent) Check account balance
+- [x] (Non-idempotent) Transfer money
+- [x] Convert Currency for transfer money
 
 ### Client (Python)
 
