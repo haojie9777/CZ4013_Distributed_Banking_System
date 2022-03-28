@@ -60,9 +60,9 @@ class TransferMoneyController(BaseController):
         """
         try:
             print_message("Transferring money...")
-            reply = self.transfer_money(account_name, account_number, account_password, account_currencyType,
+            current_balance = self.transfer_money(account_name, account_number, account_password, account_currencyType,
                                         transfer_amount, payee_account_name, payee_account_number)
-            print_message(msg=f'\nYour have transferred money from your account: {reply}')
+            print_message(msg=f'\nYou have successfully transferred, your new balance is: {current_balance}')
         except Exception as e:
             print_error(f'Transfer money failed: {str(e)}')
 

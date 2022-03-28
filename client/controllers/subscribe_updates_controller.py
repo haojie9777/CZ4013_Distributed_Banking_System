@@ -70,4 +70,4 @@ class SubscribeUpdatesController(BaseController):
         else:
             print_message(msg.data)
 
-        #notify(service=ServiceType.SUBSCRIBE_UPDATES, request_id=msg.request_id)
+

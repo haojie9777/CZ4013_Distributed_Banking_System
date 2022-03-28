@@ -37,7 +37,7 @@ def print_message(msg: str) -> None:
     :param msg: message to be printed
     :return:
     """
-    print(f"{Colors.OKBLUE}{msg}{Colors.ENDC}")
+    print(f"{Colors.OKCYAN}{msg}{Colors.ENDC}")
 
 
 def print_warning(msg: str) -> None:

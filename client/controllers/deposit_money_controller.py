@@ -54,8 +54,8 @@ class DepositMoneyController(BaseController):
         """
         try:
             print_message("Deposting money...")
-            account_number = self.deposit_money(account_name, account_number, account_password, account_currencyType, deposit_amount)
-            print_message(msg=f'\nYour have deposited money into your account: {account_number}')
+            current_balance = self.deposit_money(account_name, account_number, account_password, account_currencyType, deposit_amount)
+            print_message(msg=f'\nYou have successfully deposited, your new balance is: {current_balance}')
         except Exception as e:
             print_error(f'Deposit money failed: {str(e)}')
 

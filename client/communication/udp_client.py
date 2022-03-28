@@ -51,11 +51,8 @@ class UDPClientSocket:
                     else:
                         print_warning("Simulated Request Failure")
 
-                    updated_time_out = time_out
                     while True:
-                        #start = time()
                         data, addr = cls.UDPSocket.recvfrom(buffer_size)
-                        #end = time()
 
                         if addr == cls.serverAddressPort:
 
@@ -67,11 +64,6 @@ class UDPClientSocket:
 
                         else:
                             print_warning(f'Unexpected external message from {addr} detected! Discarding...')
-
-                        #updated_time_out -= end - start
-                        #if updated_time_out <= 0:
-                        #    raise socket.timeout
-                        #cls.UDPSocket.settimeout(updated_time_out)
                 except socket.timeout:
                     print_warning(msg=f'Did not receive any message from server within {time_out} seconds. Resending...')
 
@@ -90,13 +82,11 @@ class UDPClientSocket:
         :param buffer_size: maximum size of the expected reply
         :return: 
         """
-        end_time = time() + subscribe_time
         cls.UDPSocket.settimeout(subscribe_time)
 
         try:
             while True:
                 data, addr = cls.UDPSocket.recvfrom(buffer_size)
-                end = time()
 
                 if addr == cls.serverAddressPort:
                     reply_message = unmarshall(data)
@@ -105,9 +95,8 @@ class UDPClientSocket:
                 else:
                     print_warning(f'Unexpected message from {addr} detected! Discarding...')
 
-                cls.UDPSocket.settimeout(end_time - end)
-        except (socket.timeout, ValueError):
-            print_message("\nYour subscription has expired. Thanks for using!")
+        except (socket.timeout, ValueError, KeyboardInterrupt):
+            print_message("\nYour subscription has expired. Thanks for listening!")
             return
 
 
