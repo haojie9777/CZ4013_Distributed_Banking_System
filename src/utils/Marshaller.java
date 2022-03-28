@@ -68,10 +68,7 @@ public class Marshaller {
                 System.out.println("Marshalling Broadcast Account Update Request");
                 request.put("requestType", requestParams[0]);
                 request.put("requestId", requestParams[1]);
-                request.put("accountName", requestParams[2]);
-                request.put("accountNumber", requestParams[3]);
-                request.put("password", requestParams[4]);
-                request.put("monitorInterval", requestParams[5]);
+                request.put("monitorInterval", requestParams[2]);
 
                 return request;
 
