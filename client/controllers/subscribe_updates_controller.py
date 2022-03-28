@@ -70,4 +70,4 @@ class SubscribeUpdatesController(BaseController):
         else:
             prompt_message_decorator(msg.data)
 
-        notify(service=ServiceType.SUBSCRIBE_UPDATES, request_id=msg.request_id)
+        #notify(service=ServiceType.SUBSCRIBE_UPDATES, request_id=msg.request_id)
