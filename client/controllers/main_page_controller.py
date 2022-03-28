@@ -3,7 +3,7 @@ import sys
 from controllers import BaseController, CheckAccountBalanceController, CloseAccountController, \
     OpenAccountController, SubscribeUpdatesController, TransferMoneyController, DepositMoneyController, WithdrawMoneyController
 
-from helpers import *
+from communication import *
 
 
 class MainPageController(BaseController):
@@ -22,14 +22,13 @@ class MainPageController(BaseController):
             "Close an account",
             "Deposit Money",
             "Withdraw Money",
-
             "Subscribe to updates",
             "Transfer Money to another account",
             "Check account balance",
             "Exit"
         ]
 
-    def enter(self, *args, **kwargs):
+    def execute(self):
         self.show_options()
         self.handler(get_menu_option(max_choice=len(self.options)))
 

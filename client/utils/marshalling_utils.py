@@ -5,9 +5,9 @@ from uuid import uuid4 as uuid
 
 
 class MessageType(Enum):
-    CALL = "CALL"
+    REQUEST = "REQUEST"
     REPLY = "REPLY"
-    ONEWAY = "ONEWAY"
+    ACK = "ACK"
     EXCEPTION = "EXCEPTION"
 
 
@@ -39,9 +39,9 @@ class BaseMessage:
         self.request_id = request_id
 
 
-class CallMessage(BaseMessage):
+class RequestMessage(BaseMessage):
     """
-    UDP message of type CALL
+    UDP message of type Request
     """
 
     def __init__(self, service: ServiceType, data: Tuple):
@@ -84,14 +84,14 @@ class ExceptionMessage(BaseMessage):
         self.error_msg = error_msg
 
 
-class OneWayMessage(ReplyMessage):
+class AckMessage(ReplyMessage):
     """
-    UDP message of type ONEWAR (a.k.a NOTIFY)
+    UDP message of type ACK (a.k.a NOTIFY)
     """
 
     def __init__(self, service: ServiceType, request_id: str, data: list):
         super().__init__(request_id, data)
-        self.msg_type = MessageType.ONEWAY
+        self.msg_type = MessageType.ACK
         self.service = service
 
     def marshall(self) -> bytearray:
@@ -101,7 +101,7 @@ class OneWayMessage(ReplyMessage):
         return msg_in_bytes
 
 
-def unmarshall(data: bytes) -> Union[ReplyMessage, OneWayMessage, ExceptionMessage]:
+def unmarshall(data: bytes) -> Union[ReplyMessage, AckMessage, ExceptionMessage]:
     """
     Unmarshall a message in bytes to one of the predefined UDP mesage types
     :param data: raw data in bytes
@@ -125,8 +125,8 @@ def unmarshall(data: bytes) -> Union[ReplyMessage, OneWayMessage, ExceptionMessa
 
 
 if __name__ == '__main__':
-    msg = CallMessage(service=ServiceType.FACILITY_AVAIL_CHECKING, data=('North Hill Gym', ['Sun', 'Coming Mon']))
+    msg = RequestMessage(service=ServiceType.FACILITY_AVAIL_CHECKING, data=('North Hill Gym', ['Sun', 'Coming Mon']))
     bytes_msg = msg.marshall()
-    from helpers import UDPClientSocket
+    from communication import UDPClientSocket
 
     UDPClientSocket.send_msg(msg=bytes_msg, request_id=msg.request_id)

@@ -1,5 +1,5 @@
-import re
-from typing import List, Tuple
+
+from typing import List
 
 from utils import prompt_message_decorator, print_warning
 

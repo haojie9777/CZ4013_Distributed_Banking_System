@@ -1,10 +1,10 @@
 from typing import Callable, Union
 
-from helpers import UDPClientSocket
-from utils import ServiceType, CallMessage, ReplyMessage, OneWayMessage, ExceptionMessage
+from communication import UDPClientSocket
+from utils import ServiceType, RequestMessage, ReplyMessage, AckMessage, ExceptionMessage
 
 
-def request(service: ServiceType, *args, **kwargs) -> Union[ReplyMessage, OneWayMessage, ExceptionMessage]:
+def request(service: ServiceType, *args, **kwargs) -> Union[ReplyMessage, AckMessage, ExceptionMessage]:
     """
     This will send CALL request to the server and wait for a reply
     :param service: name of the service
@@ -12,7 +12,7 @@ def request(service: ServiceType, *args, **kwargs) -> Union[ReplyMessage, OneWay
     :param kwargs:
     :return: Reply message from the server
     """
-    msg = CallMessage(service=service, data=args)
+    msg = RequestMessage(service=service, data=args)
     marshalled_msg = msg.marshall()
     # marshalled_msg = struct.pack('<I', create_validation_code(marshalled_msg)) + marshalled_msg
     print(marshalled_msg)
@@ -29,9 +29,8 @@ def notify(service: ServiceType, request_id: str, *args, **kwargs):
     :param kwargs:
     :return:
     """
-    msg = OneWayMessage(service=service, request_id=request_id, data=args)
+    msg = AckMessage(service=service, request_id=request_id, data=args)
     marshalled_msg = msg.marshall()
-    # marshalled_msg = struct.pack('<I', create_validation_code(marshalled_msg)) + marshalled_msg
     print(marshalled_msg)
     UDPClientSocket.send_msg(msg=marshalled_msg, request_id=msg.request_id, wait_for_response=False, **kwargs)
 

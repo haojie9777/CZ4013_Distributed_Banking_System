@@ -1,7 +1,7 @@
 from time import time
 import socket
 from typing import Callable
-
+import random
 from configs import *
 from utils import *
 
@@ -26,7 +26,7 @@ class UDPClientSocket:
     @classmethod
     def send_msg(cls, msg: bytes, request_id: str, wait_for_response: bool = True, time_out: int = 5,
                  max_attempt: int = float('inf'), buffer_size: int = 1024,
-                 simulate_comm_omission_fail=False) -> Union[ReplyMessage, OneWayMessage, ExceptionMessage, None]:
+                 simulate_comm_omission_fail=False) -> Union[ReplyMessage, AckMessage, ExceptionMessage, None]:
         """
         This will forward a message to the server
         :param msg: message to be included in the UDP message data part
@@ -45,10 +45,11 @@ class UDPClientSocket:
                 cls.UDPSocket.settimeout(time_out)
                 attempt += 1
                 try:
-                    if not simulate_comm_omission_fail:
+                    if not simulate_comm_omission_fail or\
+                            simulate_comm_omission_fail and random.randint(0, 9) != 0:
                         cls.UDPSocket.sendto(msg, cls.serverAddressPort)
                     else:
-                        print_warning("Simulated Packet Loss")
+                        print_warning("Simulated Request Failure")
 
                     updated_time_out = time_out
                     while True:
@@ -62,20 +63,20 @@ class UDPClientSocket:
                             if reply_message.request_id == request_id:
                                 return reply_message
                             else:
-                                print_warning('Unexpected Message From Server Detected! Discarding...')
+                                print_warning('Unexpected message from server detected! Discarding...')
 
                         else:
-                            print_warning(f'Unexpected External Message From {addr} Detected! Discarding...')
+                            print_warning(f'Unexpected external message from {addr} detected! Discarding...')
 
                         updated_time_out -= end - start
                         if updated_time_out <= 0:
                             raise socket.timeout
                         cls.UDPSocket.settimeout(updated_time_out)
                 except socket.timeout:
-                    print_warning(msg=f'No Message Received From Server In {time_out} Seconds. Resending...')
+                    print_warning(msg=f'Did not receive any message from server within {time_out} seconds. Resending...')
 
-            print_error(msg=f'Maximum {max_attempt} Attempts Reached. '
-                            f'Please Check Your Internet Connection And Try Again Later.')
+            print_error(msg=f'Maximum {max_attempt} attempts reached. '
+                            f'Please check your internet connection and try again later.')
         else:
             cls.UDPSocket.sendto(msg, cls.serverAddressPort)
 
@@ -103,14 +104,14 @@ class UDPClientSocket:
                     if reply_message.request_id == subscription_id:
                         call_back_function(reply_message)
                     else:
-                        print_warning('Unexpected Message From Server Detected! Discarding...')
+                        print_warning('Unexpected message from server detected! Discarding...')
 
                 else:
-                    print_warning(f'Unexpected External Message From {addr} Detected! Discarding...')
+                    print_warning(f'Unexpected message from {addr} detected! Discarding...')
 
                 cls.UDPSocket.settimeout(end_time - end)
         except (socket.timeout, ValueError):
-            print_message("\nYour Subscription Has Just Expired. Thanks For Using!")
+            print_message("\nYour subscription has expired. Thanks for using!")
             return
 
 
