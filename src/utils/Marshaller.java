@@ -109,6 +109,11 @@ public class Marshaller {
         String[] reply = { replyParams.get("requestId"), replyParams.get("status"), replyParams.get("message") };
         String joinedReply = String.join("|", reply);
         return joinedReply.getBytes();
-    };
+    }
 
+    public static byte[] marshallUpdateMsg(HashMap<String, String> replyParams) {
+        String[] reply = { replyParams.get("requestId"), replyParams.get("status"), replyParams.get("updateMessage") };
+        String joinedReply = String.join("|", reply);
+        return joinedReply.getBytes();
+    }
 }

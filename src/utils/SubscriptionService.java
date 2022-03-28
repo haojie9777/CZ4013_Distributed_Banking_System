@@ -42,10 +42,10 @@ public class SubscriptionService {
         return subscribersList;
     }
 
-    public static String createOpenAccountMsg(HashMap<String, String> request, int newAccountNum) {
+    public static String createOpenAccountMsg(HashMap<String, String> request, String newAccountNum) {
         String monitorMsg = "A new account has been created with the following details:\n"
                 + "Account Name: " + request.get("accountName") + "\n"
-                + "Account Number: " + Integer.toString(newAccountNum) + "\n"
+                + "Account Number: " + newAccountNum + "\n"
                 + "Currency: " + request.get("currency") + "\n"
                 + "Initial Balance: " + request.get("initialBalance") + "\n";
 

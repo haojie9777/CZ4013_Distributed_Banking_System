@@ -186,8 +186,8 @@ server start -> create a handler -> handler class creates accountManager class
 - [x] Marshalling/unmarshalling
 - [x] At-least-once semantics (specify semantics as argument when starting server)
 - [x] At-most-once semantics (specify semantics as argument when starting server)
-- [ ] Simulate loss of request and reply
-- [ ] Fault tolerance
+- [x] Simulate loss of request and reply
+- [x] Fault tolerance
 - [x] Set currency to enum type
 - [x] Auto currency convert
 
@@ -199,7 +199,7 @@ server start -> create a handler -> handler class creates accountManager class
 - [x] Close account
 - [x] Deposit
 - [x] Withdraw
-- [ ] callback function to notify subscribers after every service
+- [x] callback function to notify subscribers after every service
 - [x] (Idempotent) Check account balance
 - [x] (Non-idempotent) Transfer money
 - [x] Convert Currency for transfer money
@@ -210,7 +210,7 @@ server start -> create a handler -> handler class creates accountManager class
 - [x] Close account
 - [x] Deposit
 - [x] Withdraw
-- [ ] Broadcast update to subscribers
+- [x] Broadcast update to subscribers
 - [x] (Idempotent) Check account balance
-- [ ] (Non-idempotent) Transfer money
+- [x] (Non-idempotent) Transfer money
 - [x] Password to be fixed length
