@@ -17,8 +17,8 @@ class ServiceType(Enum):
     DEPOSIT_MONEY = '2'
     WITHDRAW_MONEY = '3'
     SUBSCRIBE_UPDATES = '4'
-    CHECK_BALANCE = '5'
-    TRANSFER_MONEY = '6'
+    TRANSFER_MONEY = '5'
+    CHECK_BALANCE = '6'
 
 
 type_to_hex = dict({
