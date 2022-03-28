@@ -24,7 +24,7 @@ class UDPClientSocket:
     serverAddressPort = (SERVER_IP, SERVER_PORT)
 
     @classmethod
-    def send_msg(cls, msg: bytes, request_id: str, wait_for_response: bool = True, time_out: int = 5,
+    def send_msg(cls, msg: bytes, request_id: str, wait_for_response: bool = True, time_out: int = 2,
                  max_attempt: int = float('inf'), buffer_size: int = 1024,
                  simulate_comm_omission_fail=False) -> Union[ReplyMessage, AckMessage, ExceptionMessage, None]:
         """
@@ -53,9 +53,9 @@ class UDPClientSocket:
 
                     updated_time_out = time_out
                     while True:
-                        start = time()
+                        #start = time()
                         data, addr = cls.UDPSocket.recvfrom(buffer_size)
-                        end = time()
+                        #end = time()
 
                         if addr == cls.serverAddressPort:
 
@@ -68,10 +68,10 @@ class UDPClientSocket:
                         else:
                             print_warning(f'Unexpected external message from {addr} detected! Discarding...')
 
-                        updated_time_out -= end - start
-                        if updated_time_out <= 0:
-                            raise socket.timeout
-                        cls.UDPSocket.settimeout(updated_time_out)
+                        #updated_time_out -= end - start
+                        #if updated_time_out <= 0:
+                        #    raise socket.timeout
+                        #cls.UDPSocket.settimeout(updated_time_out)
                 except socket.timeout:
                     print_warning(msg=f'Did not receive any message from server within {time_out} seconds. Resending...')
 
@@ -105,7 +105,6 @@ class UDPClientSocket:
                         call_back_function(reply_message)
                     else:
                         print_warning('Unexpected message from server detected! Discarding...')
-
                 else:
                     print_warning(f'Unexpected message from {addr} detected! Discarding...')
 

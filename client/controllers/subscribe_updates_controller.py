@@ -63,7 +63,7 @@ class SubscribeUpdatesController(BaseController):
         """
         This is the callback method on received of the server events. It prints out the event
         and sends ACK to the server
-        :param msg: message received from the server
+        :param msg: event message received from the server
         :return:
         """
         if type(msg) is ExceptionMessage:

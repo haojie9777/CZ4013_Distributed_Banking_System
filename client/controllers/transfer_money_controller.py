@@ -37,7 +37,7 @@ class TransferMoneyController(BaseController):
         account_currencyType_choice = get_menu_option(max_choice=len(self.currency_list),
                                                       msg='Please indicate account currency')
         account_currencyType = CurrencyType[self.currency_list[account_currencyType_choice]]
-        transfer_amount = get_float_input(f'Please indicate amount to withdraw')
+        transfer_amount = get_float_input(f'Please indicate amount to transfer')
         payee_account_name = get_string_input(f'Please indicate payee name')
         payee_account_number = get_int_input(f'Please indicate payee account number')
         self.handler(account_name, account_number, account_password, account_currencyType, transfer_amount,
