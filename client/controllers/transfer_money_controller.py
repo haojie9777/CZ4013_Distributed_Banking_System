@@ -1,6 +1,6 @@
 from controllers import BaseController
 
-from helpers import *
+from communication import *
 
 
 class CurrencyType(Enum):
@@ -17,7 +17,7 @@ class TransferMoneyController(BaseController):
     def __init__(self):
         super().__init__()
         self.currency_list = []
-        self.ctrl_list = ['Back To Homepage', 'Transfer Money to another account']
+        self.ctrl_list = ['Back to homepage', 'Transfer Money to another account']
         for currency in CurrencyType:
             self.currency_list.append(currency.name)
 
@@ -29,18 +29,13 @@ class TransferMoneyController(BaseController):
     def options(self):
         return self.currency_list
 
-    @options.setter
-    def options(self, val):
-        pass
-
-    def enter(self) -> int:
+    def execute(self) -> int:
         account_name = get_string_input(f'Please indicate your name')
         account_number = get_int_input(f'Please indicate account number')
         account_password = get_string_input(f'Please indicate password')
         print_options(self.options, show_number=True)
         account_currencyType_choice = get_menu_option(max_choice=len(self.currency_list),
-                                                      msg='Please indicate account currency',
-                                                      min_choice=0)
+                                                      msg='Please indicate account currency')
         account_currencyType = CurrencyType[self.currency_list[account_currencyType_choice]]
         transfer_amount = get_float_input(f'Please indicate amount to withdraw')
         payee_account_name = get_string_input(f'Please indicate payee name')

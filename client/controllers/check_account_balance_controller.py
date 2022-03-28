@@ -1,6 +1,6 @@
 
 from controllers import BaseController
-from helpers import *
+from communication import *
 
 
 class CheckAccountBalanceController(BaseController):
@@ -10,7 +10,7 @@ class CheckAccountBalanceController(BaseController):
 
     def __init__(self):
         super().__init__()
-        self.ctrl_list = ['Back To Homepage', 'Check balance again']
+        self.ctrl_list = ['Back to homepage', 'Check balance again']
 
     @property
     def message(self):
@@ -20,7 +20,7 @@ class CheckAccountBalanceController(BaseController):
     def options(self):
         return None
 
-    def enter(self) -> int:
+    def execute(self) -> int:
         account_name = get_string_input(f'Please indicate name')
         account_number = get_int_input(f'Please indicate account number')
         account_password = get_string_input(f'Please indicate password')
@@ -44,7 +44,7 @@ class CheckAccountBalanceController(BaseController):
             reply_string = "Account balance is: " + balance
             print_message(reply_string)
         except Exception as e:
-            print_error(f"Bad Request Detected! {str(e)}")
+            print_error(f"Bad request detected! {str(e)}")
 
     @staticmethod
     def retrieve_account_balance(account_name: str, account_number: int, account_password: str) -> str:

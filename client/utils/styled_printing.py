@@ -101,4 +101,3 @@ def print_timetable(days: List[str], avail_by_days: List[str],
     print_options(content, show_number=False)
     if new_line_at_end:
         print()
-

@@ -10,6 +10,9 @@ public class Server {
         //ask user for semantics to use: at-least-once or at-most-once
         boolean atMostOnce = true;
 
+        float lossRate = (float) 0.2; //set loss rate for reply to client
+
+
         DatagramSocket aSocket = new DatagramSocket(6789);
         byte[] receivedBuffer = new byte[65535];
 
@@ -18,9 +21,9 @@ public class Server {
         Handler handler = new Handler(); //initialize handler
         History history = new History(); //initialize history of requests and replies
 
-        while (true){
+        while (true) {
             //receive new request from a client
-            request = new DatagramPacket(receivedBuffer,receivedBuffer.length );
+            request = new DatagramPacket(receivedBuffer, receivedBuffer.length);
             aSocket.receive(request); //blocked here if no request
 
             //unmarshall request
@@ -28,24 +31,33 @@ public class Server {
 
             //get ip and port of request for subscribing needs
             unmarshalledRequest.put("requestIp", request.getAddress().toString());
-            unmarshalledRequest.put("requestPort",Integer.toString(request.getPort()));
+            unmarshalledRequest.put("requestPort", Integer.toString(request.getPort()));
 
             String requestId = unmarshalledRequest.get("requestId");
-            if (atMostOnce && history.requestExists(requestId)){ //send cached reply to client
-                    byte[] marshalledResponse = history.getReply(requestId);
-                    //send response to client
+            if (atMostOnce && history.requestExists(requestId)) { //send cached reply to client
+                byte[] marshalledResponse = history.getReply(requestId);
+                //simulate loss of reply
+                if (Math.random() >= lossRate) {
                     DatagramPacket reply = new DatagramPacket(marshalledResponse, marshalledResponse.length, request.getAddress(), request.getPort());
                     aSocket.send(reply);
+                } else {
+                    System.out.println("Reply to client lost!");
+
                 }
-            else {//service brand new request
+
+            } else {//service brand new request
                 HashMap<String, String> response = handler.handleRequest(unmarshalledRequest);  //service request
                 System.out.println(response);
                 byte[] marshalledResponse = Marshaller.marshall(response); //marshall response
                 history.addReply(requestId, marshalledResponse); //store reply in history
 
-                //send response to client
-                DatagramPacket reply = new DatagramPacket(marshalledResponse, marshalledResponse.length, request.getAddress(), request.getPort());
-                aSocket.send(reply);
+                if (Math.random() >= lossRate) {
+                    //send response to client
+                    DatagramPacket reply = new DatagramPacket(marshalledResponse, marshalledResponse.length, request.getAddress(), request.getPort());
+                    aSocket.send(reply);
+                } else {
+                    System.out.println("Reply to client lost!");
+                }
 
                 //send update to all subscribers
                 if (!unmarshalledRequest.get("requestType").equals("4")
@@ -58,10 +70,6 @@ public class Server {
                     }
                 }
             }
-
         }
-
-
-
     }
 }

@@ -9,7 +9,7 @@ class BaseController(ABC):
     @property
     def message(self):
         """
-        :return: menu for the user to choose
+        :return: greeting message of controller
         """
         raise NotImplementedError
 
@@ -22,30 +22,26 @@ class BaseController(ABC):
 
     def show_options(self):
         """
-        print the menu to screen for the user to choose
+        print the list of options on screen for the user to choose
         :return:
         """
         print_options(self.options)
 
-    def start(self, *args, **kwargs):
+    def start(self):
         """
-        Start an controller
-        :param args:
-        :param kwargs:
+        Start a controller
         :return:
         """
         while True:
             print_message(self.message)
-            i = self.enter(*args, **kwargs)
+            i = self.execute()
             if i == 0:
                 return
 
     @abstractmethod
-    def enter(self, *args, **kwargs):
+    def execute(self):
         """
-        Enter the business logic once from start
-        :param args:
-        :param kwargs:
+        Execute the business logic once from start
         :return:
         """
         raise NotImplementedError

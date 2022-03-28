@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from utils import *
-from helpers import *
+from communication import *
 
 
 class FacilityAvailSubscribingController():
@@ -60,7 +60,7 @@ class FacilityAvailSubscribingController():
 
 
     @classmethod
-    def display_availblity(cls, msg: Union[CallMessage, OneWayMessage, ExceptionMessage]):
+    def display_availblity(cls, msg: Union[RequestMessage, AckMessage, ExceptionMessage]):
         """
         This is the callback method on received of the server posted availability update. It prints out the time table
         and sends ACK to the server

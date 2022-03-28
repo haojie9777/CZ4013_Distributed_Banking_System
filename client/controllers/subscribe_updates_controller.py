@@ -1,6 +1,6 @@
 from controllers import BaseController
 
-from helpers import *
+from communication import *
 
 
 class SubscribeUpdatesController(BaseController):
@@ -10,7 +10,7 @@ class SubscribeUpdatesController(BaseController):
 
     def __init__(self):
         super().__init__()
-        self.ctrl_list = ['Back To Homepage', 'Subscribe again']
+        self.ctrl_list = ['Back to homepage', 'Subscribe again']
 
     @property
     def message(self):
@@ -20,11 +20,7 @@ class SubscribeUpdatesController(BaseController):
     def options(self):
         return None
 
-    @options.setter
-    def options(self, val):
-        pass
-
-    def enter(self) -> int:
+    def execute(self) -> int:
         monitor_interval = get_int_input(f'Please indicate how long to monitor updates (in seconds)')
         self.handler(monitor_interval)
         print_options(self.ctrl_list)
@@ -63,7 +59,7 @@ class SubscribeUpdatesController(BaseController):
         return reply_msg.data
 
     @classmethod
-    def display_events(cls, msg: Union[CallMessage, OneWayMessage, ExceptionMessage]):
+    def display_events(cls, msg: Union[RequestMessage, AckMessage, ExceptionMessage]):
         """
         This is the callback method on received of the server events. It prints out the event
         and sends ACK to the server
@@ -71,7 +67,7 @@ class SubscribeUpdatesController(BaseController):
         :return:
         """
         if type(msg) is ExceptionMessage:
-            print_error(f'Exception Received From Server: {msg.error_msg}')
+            print_error(f'Exception received From Server: {msg.error_msg}')
         else:
             prompt_message_decorator(msg.data)
 

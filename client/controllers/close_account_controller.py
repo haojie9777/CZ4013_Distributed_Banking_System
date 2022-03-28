@@ -1,6 +1,6 @@
 
 from controllers import BaseController
-from helpers import *
+from communication import *
 
 
 class CloseAccountController(BaseController):
@@ -10,7 +10,7 @@ class CloseAccountController(BaseController):
 
     def __init__(self):
         super().__init__()
-        self.ctrl_list = ['Back To Homepage', 'Close another account']
+        self.ctrl_list = ['Back to homepage', 'Close another account']
 
     @property
     def message(self):
@@ -20,11 +20,7 @@ class CloseAccountController(BaseController):
     def options(self):
         return None
 
-    @options.setter
-    def options(self, val):
-        pass
-
-    def enter(self) -> int:
+    def execute(self) -> int:
         account_name = get_string_input(f'Please indicate name')
         account_number = get_int_input(f'Please indicate account number')
         account_password = get_string_input(f'Please indicate password')
@@ -43,7 +39,7 @@ class CloseAccountController(BaseController):
         try:
             print_message("Closing account...")
             account_number = self.close_account(account_name, account_number, account_password)
-            print_message(msg=f'\nYou have Successfully closed your account: {account_number}')
+            print_message(msg=f'\nYou have successfully closed your account: {account_number}')
         except Exception as e:
             print_error(f'Open account failed: {str(e)}')
 
