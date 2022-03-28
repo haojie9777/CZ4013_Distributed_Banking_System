@@ -9,6 +9,9 @@ public class Server {
         //ask user for semantics to use: at-least-once or at-most-once
         boolean atMostOnce = true;
 
+        float lossRate = (float) 0.2; //set loss rate for reply to client
+
+
         DatagramSocket aSocket = new DatagramSocket(6789);
         byte[] receivedBuffer = new byte[65535];
 
@@ -32,18 +35,32 @@ public class Server {
             String requestId = unmarshalledRequest.get("requestId");
             if (atMostOnce && history.requestExists(requestId)){ //send cached reply to client
                     byte[] marshalledResponse = history.getReply(requestId);
-                    //send response to client
-                    DatagramPacket reply = new DatagramPacket(marshalledResponse, marshalledResponse.length, request.getAddress(), request.getPort());
-                    aSocket.send(reply);
+                    //simulate loss of reply
+                    if (Math.random() >= lossRate){
+                        DatagramPacket reply = new DatagramPacket(marshalledResponse, marshalledResponse.length, request.getAddress(), request.getPort());
+                        aSocket.send(reply);
+                    }
+                    else{
+                        System.out.println("Reply to client lost!");
+
+                    }
+
                 }
             else{//service brand new request
                 HashMap<String, String> response = handler.handleRequest(unmarshalledRequest);  //service request
                 System.out.println(response);
                 byte[] marshalledResponse = Marshaller.marshall(response); //marshall response
                 history.addReply(requestId, marshalledResponse); //store reply in history
-                //send response to client
-                DatagramPacket reply = new DatagramPacket(marshalledResponse, marshalledResponse.length, request.getAddress(), request.getPort());
-                aSocket.send(reply);
+
+                if (Math.random() >= lossRate){
+                    //send response to client
+                    DatagramPacket reply = new DatagramPacket(marshalledResponse, marshalledResponse.length, request.getAddress(), request.getPort());
+                    aSocket.send(reply);
+                }
+                else{
+                    System.out.println("Reply to client lost!");
+                }
+
                 }
 
         }
