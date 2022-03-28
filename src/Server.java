@@ -16,6 +16,8 @@ public class Server {
             System.out.println("Server running with at-least-once semantics");
         }
 
+        System.out.println("---------------------------------------------------");
+
         float lossRate = (float) 0.2; //set loss rate for reply to client
 
 
@@ -53,7 +55,6 @@ public class Server {
 
             } else {//service brand new request
                 HashMap<String, String> response = handler.handleRequest(unmarshalledRequest);  //service request
-                System.out.println(response);
                 byte[] marshalledResponse = Marshaller.marshall(response); //marshall response
                 history.addReply(requestId, marshalledResponse); //store reply in history
 
@@ -73,6 +74,7 @@ public class Server {
                         byte[] marshalledUpdateMsg = Marshaller.marshallUpdateMsg(response);
                         DatagramPacket updateMsgReply = new DatagramPacket(marshalledUpdateMsg, marshalledUpdateMsg.length, subscriber.getIpAddress(), subscriber.getPort());
                         aSocket.send(updateMsgReply);
+                        System.out.println("Sent update to " + subscriber.getIpAddress() + ":" + subscriber.getPort());
                     }
                 }
             }

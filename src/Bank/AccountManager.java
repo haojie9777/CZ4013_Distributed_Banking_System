@@ -69,7 +69,7 @@ public class AccountManager {
         if (account == null){
             return -1;
         }
-        else{
+        else {
             if (name.equals(account.getName()) && password.equals(account.getPassword())){
                 float convertedAmount = CurrencyConverter.convertCurrency(amount, requestCurrency, account.getCurrencyType());
                 float newBalance = account.getBalance() - convertedAmount;
@@ -78,11 +78,11 @@ public class AccountManager {
                     accountsHashMap.put(accountNumber, account);
                     return account.getBalance();
                 }
-                else{
+                else {
                     return -3;
                 }
             }
-            else{
+            else {
                 return -2;
             }
         }
@@ -117,7 +117,6 @@ public class AccountManager {
         }
     }
 
-
     public float getAccountBalance(int accountNumber, String name, String password){
         Account account = accountsHashMap.get(accountNumber);
         if (account == null){
@@ -131,8 +130,5 @@ public class AccountManager {
                 return -2;
             }
         }
-
     }
-
-
 }
