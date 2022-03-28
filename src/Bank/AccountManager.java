@@ -104,13 +104,13 @@ public class AccountManager {
         }
         //check if payer balance sufficient before transferring
         float convertedAmount = CurrencyConverter.convertCurrency(amount, requestCurrency, payer.getCurrencyType());
-        float newBalance = payer.getBalance() - convertedAmount;
+        float newBalance = payer.getBalance() - amount;
         if (newBalance >= 0){
             payer.setBalance(payer.getBalance() - amount);
             accountsHashMap.put(accountNumber, payer);
-            payee.setBalance(payee.getBalance() + amount);
+            payee.setBalance(payee.getBalance() + convertedAmount);
             accountsHashMap.put(payeeAccountNumber,payee);
-            return convertedAmount;
+            return newBalance;
         }
         else{
             return -3;

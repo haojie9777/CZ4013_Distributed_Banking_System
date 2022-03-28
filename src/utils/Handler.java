@@ -112,6 +112,7 @@ public class Handler {
                 long monitorInterval = Long.valueOf(request.get("monitorInterval"));
                 int requestPort = Integer.valueOf(request.get("requestPort"));
                 subscriptionService.addSubscriber(requestIp, requestPort, monitorInterval);
+                break;
             }
 
             case "5": {

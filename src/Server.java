@@ -9,6 +9,12 @@ public class Server {
         System.out.println("Running IDamNerd Bank's Server...");
         //ask user for semantics to use: at-least-once or at-most-once
         boolean atMostOnce = true;
+        if (atMostOnce) {
+            System.out.println("Server running with at-most-once semantics!");
+        }
+        else {
+            System.out.println("Server running with at-least-once semantics");
+        }
 
         float lossRate = (float) 0.2; //set loss rate for reply to client
 
@@ -30,7 +36,7 @@ public class Server {
             HashMap<String, String> unmarshalledRequest = Marshaller.unmarshall(receivedBuffer);
 
             //get ip and port of request for subscribing needs
-            unmarshalledRequest.put("requestIp", request.getAddress().toString());
+            unmarshalledRequest.put("requestIp", (request.getAddress().toString()).substring(1));
             unmarshalledRequest.put("requestPort", Integer.toString(request.getPort()));
 
             String requestId = unmarshalledRequest.get("requestId");
@@ -64,7 +70,7 @@ public class Server {
                         && !unmarshalledRequest.get("requestType").equals("6")) {
                     ArrayList<Subscriber> subscribers = handler.retrieveSubscribers();
                     for (Subscriber subscriber : subscribers) {
-                        byte[] marshalledUpdateMsg = Marshaller.marshallUpdateMsg(unmarshalledRequest);
+                        byte[] marshalledUpdateMsg = Marshaller.marshallUpdateMsg(response);
                         DatagramPacket updateMsgReply = new DatagramPacket(marshalledUpdateMsg, marshalledUpdateMsg.length, subscriber.getIpAddress(), subscriber.getPort());
                         aSocket.send(updateMsgReply);
                     }
