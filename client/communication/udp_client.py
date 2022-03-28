@@ -81,8 +81,7 @@ class UDPClientSocket:
             cls.UDPSocket.sendto(msg, cls.serverAddressPort)
 
     @classmethod
-    def listen_msg(cls, subscribe_time: int, subscription_id: int,
-                   call_back_function: Callable, buffer_size: int = 1024) -> None:
+    def listen_msg(cls, subscribe_time: int, call_back_function: Callable, buffer_size: int = 1024) -> None:
         """
         This will listen message from the server for a certain period of time
         :param subscribe_time: time to listen in seconds
@@ -101,10 +100,8 @@ class UDPClientSocket:
 
                 if addr == cls.serverAddressPort:
                     reply_message = unmarshall(data)
-                    if reply_message.request_id == subscription_id:
-                        call_back_function(reply_message)
-                    else:
-                        print_warning('Unexpected message from server detected! Discarding...')
+                    call_back_function(reply_message)
+
                 else:
                     print_warning(f'Unexpected message from {addr} detected! Discarding...')
 

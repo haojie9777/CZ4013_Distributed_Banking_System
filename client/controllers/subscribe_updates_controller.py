@@ -39,8 +39,7 @@ class SubscribeUpdatesController(BaseController):
             print_message(f'\nYou have successfully subscribed to events!')
             print_message(f'If you would like to unsubscribe: Press {inline_important_message_decorator("Ctrl + C")} ')
             try:
-                listen(func=self.display_events, subscribe_time=monitor_interval,
-                       subscription_id=subscription_id)
+                listen(func=self.display_events, subscribe_time=monitor_interval)
             except KeyboardInterrupt:
                 return
         except Exception as e:
