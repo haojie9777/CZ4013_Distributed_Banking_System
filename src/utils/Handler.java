@@ -117,6 +117,30 @@ public class Handler {
 
             case "5": {
                 System.out.println("Transferring money from one account to another");
+                String accountName = request.get("accountName");
+                int accountNumber = Integer.parseInt(request.get("accountNumber"));
+                String password = request.get("password");
+                Account.Currency currency = Account.Currency.valueOf(request.get("currency"));
+                float amount = Float.parseFloat(request.get("amount"));
+                String payeeAccountName = request.get("payeeAccountName");
+                int payeeAccountNumber = Integer.parseInt(request.get("payeeAccountNumber"));
+                float newBalance = accountManager.transferMoney(accountNumber, accountName, password, currency, amount,
+                payeeAccountName, payeeAccountNumber);
+                if (newBalance == -1){ //account number not found
+                    message = "Account number not found for either payer and/or payee";
+                    status = "0";
+                }
+                else if (newBalance == -2){
+                    message = "Wrong account name or password";
+                    status = "0";
+                }
+                else if (newBalance == -3){
+                    message = "Insufficient balance in account to transfer";
+                    status = "0";
+                }
+                else {
+                    message = "New account balance in payer after transfer = "+String.valueOf(newBalance);
+                }
                 break;
             }
             case "6" : {

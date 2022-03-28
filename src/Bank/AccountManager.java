@@ -88,6 +88,35 @@ public class AccountManager {
         }
     }
 
+    public float transferMoney(int accountNumber, String name, String password, Account.Currency requestCurrency, float amount,
+                               String payeeName, int payeeAccountNumber) {
+
+        Account payer = accountsHashMap.get(accountNumber);
+        Account payee = accountsHashMap.get(payeeAccountNumber);
+
+        //check if account numbers exist
+        if (payer == null || payee == null) {
+            return -1;
+        }
+        //check if payer credentials correct
+        if (!name.equals(payer.getName()) || !password.equals(payer.getPassword())){
+            return -2;
+        }
+        //check if payer balance sufficient before transferring
+        float convertedAmount = CurrencyConverter.convertCurrency(amount, requestCurrency, payer.getCurrencyType());
+        float newBalance = payer.getBalance() - convertedAmount;
+        if (newBalance >= 0){
+            payer.setBalance(payer.getBalance() - amount);
+            accountsHashMap.put(accountNumber, payer);
+            payee.setBalance(payee.getBalance() + amount);
+            accountsHashMap.put(payeeAccountNumber,payee);
+            return convertedAmount;
+        }
+        else{
+            return -3;
+        }
+    }
+
 
     public float getAccountBalance(int accountNumber, String name, String password){
         Account account = accountsHashMap.get(accountNumber);
