@@ -4,12 +4,11 @@ from communication import UDPClientSocket
 from utils import ServiceType, RequestMessage, ReplyMessage, ExceptionMessage
 
 
-def request(service: ServiceType, *args, **kwargs) -> Union[ReplyMessage, ExceptionMessage]:
+def request(service: ServiceType, *args) -> Union[ReplyMessage, ExceptionMessage]:
     """
     This will send CALL request to the server and wait for a reply
     :param service: name of the service
     :param args: arguments to be passed for the service
-    :param kwargs:
     :return: Reply message from the server
     """
     msg = RequestMessage(service=service, data=args)
@@ -19,11 +18,11 @@ def request(service: ServiceType, *args, **kwargs) -> Union[ReplyMessage, Except
     return reply_msg
 
 
-def listen(func: Callable, **kwargs):
+def listen(func: Callable, subscribe_time: int):
     """
     This is block the user from input and listen for the message from server
+    :param subscribe_time: time to listen in seconds
     :param func: call back functions to be executed upon receiving a valid message
-    :param kwargs:
     :return:
     """
-    UDPClientSocket.listen_msg(call_back_function=func, **kwargs)
+    UDPClientSocket.listen_msg(call_back_function=func, subscribe_time=subscribe_time)

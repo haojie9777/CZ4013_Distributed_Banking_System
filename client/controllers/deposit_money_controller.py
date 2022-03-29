@@ -53,7 +53,7 @@ class DepositMoneyController(BaseController):
         :return:
         """
         try:
-            print_message("Deposting money...")
+            print_message("Depositing money...")
             current_balance = self.deposit_money(account_name, account_number, account_password, account_currencyType, deposit_amount)
             print_message(msg=f'\nYou have successfully deposited, your new balance is: {current_balance}')
         except Exception as e:
