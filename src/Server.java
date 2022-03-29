@@ -18,7 +18,7 @@ public class Server {
 
         System.out.println("---------------------------------------------------");
 
-        float lossRate = (float) 0.2; //set loss rate for reply to client
+        float lossRate = (float) 0; //set loss rate for reply to client
 
 
         DatagramSocket aSocket = new DatagramSocket(6789);
@@ -50,7 +50,6 @@ public class Server {
                     aSocket.send(reply);
                 } else {
                     System.out.println("Reply to client lost!");
-
                 }
 
             } else {//service brand new request
