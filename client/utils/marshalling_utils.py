@@ -1,6 +1,5 @@
 from enum import Enum
 from typing import Tuple, Union
-import struct
 from uuid import uuid4 as uuid
 
 
@@ -19,15 +18,6 @@ class ServiceType(Enum):
     SUBSCRIBE_UPDATES = '4'
     TRANSFER_MONEY = '5'
     CHECK_BALANCE = '6'
-
-
-type_to_hex = dict({
-    int: b'\x00',
-    float: b'\x01',
-    str: b'\x02',
-    bool: b'\x03',
-    list: b'\x04'
-})
 
 
 class BaseMessage:
@@ -55,7 +45,6 @@ class RequestMessage(BaseMessage):
         :return: marshalled data in bytes
         """
         msg_in_bytes = bytearray(self.service.value.encode('ascii'))
-        # msg_in_bytes += struct.pack('B', len(self.service.value))
         msg_in_bytes += bytes("|".encode('ascii')) + bytes(self.request_id.encode('ascii')) + bytes("|".encode('ascii'))
         for a in self.data:
             msg_in_bytes += bytes(a.encode('ascii')) + bytes("|".encode('ascii'))
@@ -84,24 +73,7 @@ class ExceptionMessage(BaseMessage):
         self.error_msg = error_msg
 
 
-class AckMessage(ReplyMessage):
-    """
-    UDP message of type ACK (a.k.a NOTIFY)
-    """
-
-    def __init__(self, service: ServiceType, request_id: str, data: list):
-        super().__init__(request_id, data)
-        self.msg_type = MessageType.ACK
-        self.service = service
-
-    def marshall(self) -> bytearray:
-        msg_in_bytes = bytearray(self.service.value.encode('ascii'))
-        # msg_in_bytes += struct.pack('B', len(self.service.value))
-        msg_in_bytes += bytes("|".encode('ascii')) + bytes(self.request_id.encode('ascii'))
-        return msg_in_bytes
-
-
-def unmarshall(data: bytes) -> Union[ReplyMessage, AckMessage, ExceptionMessage]:
+def unmarshall(data: bytes) -> Union[ReplyMessage, ExceptionMessage]:
     """
     Unmarshall a message in bytes to one of the predefined UDP mesage types
     :param data: raw data in bytes
@@ -115,8 +87,7 @@ def unmarshall(data: bytes) -> Union[ReplyMessage, AckMessage, ExceptionMessage]
     message_status = decoded_data_list[1]
     print(message_status)
     if message_status == '0':
-        error_message = decoded_data_list[2]
-        return ExceptionMessage(request_id=request_id, error_msg=error_message)
+        return ExceptionMessage(request_id=request_id, error_msg=decoded_data_list[2])
     elif message_status == '1':
         return ReplyMessage(request_id=request_id, data=decoded_data_list[2])
     else:

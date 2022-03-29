@@ -1,10 +1,10 @@
 from typing import Callable, Union
 
 from communication import UDPClientSocket
-from utils import ServiceType, RequestMessage, ReplyMessage, AckMessage, ExceptionMessage
+from utils import ServiceType, RequestMessage, ReplyMessage, ExceptionMessage
 
 
-def request(service: ServiceType, *args, **kwargs) -> Union[ReplyMessage, AckMessage, ExceptionMessage]:
+def request(service: ServiceType, *args, **kwargs) -> Union[ReplyMessage, ExceptionMessage]:
     """
     This will send CALL request to the server and wait for a reply
     :param service: name of the service
@@ -18,21 +18,6 @@ def request(service: ServiceType, *args, **kwargs) -> Union[ReplyMessage, AckMes
     print(marshalled_msg)
     reply_msg = UDPClientSocket.send_msg(msg=marshalled_msg, request_id=msg.request_id, **kwargs)
     return reply_msg
-
-
-def notify(service: ServiceType, request_id: str, *args, **kwargs):
-    """
-    This will send an ONEWAY message to the server and do not wait for any reply
-    :param service: name of the service
-    :param request_id: ID of the request
-    :param args: arguments to be passed for the service
-    :param kwargs:
-    :return:
-    """
-    msg = AckMessage(service=service, request_id=request_id, data=args)
-    marshalled_msg = msg.marshall()
-    print(marshalled_msg)
-    UDPClientSocket.send_msg(msg=marshalled_msg, request_id=msg.request_id, wait_for_response=False, **kwargs)
 
 
 def listen(func: Callable, **kwargs):

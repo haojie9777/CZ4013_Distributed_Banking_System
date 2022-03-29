@@ -4,7 +4,7 @@ from typing import List
 from utils import prompt_message_decorator, print_warning
 
 
-def get_menu_option(max_choice, msg='Please Indicate Your Choice', min_choice=1) -> int:
+def get_menu_option(max_choice, msg='Please Indicate Your Choice') -> int:
     """
     Get a valid option from the menu
     :param max_choice: max possible value to be chosen
@@ -16,7 +16,7 @@ def get_menu_option(max_choice, msg='Please Indicate Your Choice', min_choice=1)
         user_input = input(prompt_message_decorator(msg))
         try:
             idx = int(user_input)
-            if not (min_choice <= idx <= max_choice):
+            if not (1 <= idx <= max_choice):
                 raise ValueError
             return idx - 1
         except ValueError:

@@ -58,7 +58,7 @@ class SubscribeUpdatesController(BaseController):
         return reply_msg.data
 
     @classmethod
-    def display_events(cls, msg: Union[RequestMessage, AckMessage, ExceptionMessage]):
+    def display_events(cls, msg: Union[RequestMessage, ExceptionMessage]):
         """
         This is the callback method on received of the server events. It prints out the event
         and sends ACK to the server
