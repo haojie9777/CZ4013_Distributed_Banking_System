@@ -23,7 +23,7 @@ class TransferMoneyController(BaseController):
 
     @property
     def message(self):
-        return 'Making sure you money goes to your recipient! Please provide more details:'
+        return 'Making sure your money goes to your recipient! Please provide more details:'
 
     @property
     def options(self):
@@ -61,7 +61,7 @@ class TransferMoneyController(BaseController):
         try:
             print_message("Transferring money...")
             current_balance = self.transfer_money(account_name, account_number, account_password, account_currencyType,
-                                        transfer_amount, payee_account_name, payee_account_number)
+                                                  transfer_amount, payee_account_name, payee_account_number)
             print_message(msg=f'\nYou have successfully transferred, your new balance is: {current_balance}')
         except Exception as e:
             print_error(f'Transfer money failed: {str(e)}')
@@ -81,7 +81,7 @@ class TransferMoneyController(BaseController):
         :param account_name: account name of payer
         :return: reply message from server
         """
-        reply_msg = request(ServiceType.WITHDRAW_MONEY, account_name, str(account_number), account_password,
+        reply_msg = request(ServiceType.TRANSFER_MONEY, account_name, str(account_number), account_password,
                             account_currencyType.value, '%.2f' % transfer_amount, payee_account_name,
                             str(payee_account_number))
         if reply_msg.msg_type == MessageType.EXCEPTION:
