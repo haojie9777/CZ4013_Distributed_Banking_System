@@ -32,7 +32,7 @@ class OpenAccountController(BaseController):
     def execute(self) -> int:
         account_name = get_string_input(f'Please indicate name')
         account_password = get_string_input(f'Please indicate password, only input 6 characters')
-        print_options(self.options, show_number=True)
+        print_options(self.options)
         account_currencyType_choice = get_menu_option(max_choice=len(self.currency_list),
                                                       msg='Please indicate account currency')
         account_currencyType = CurrencyType[self.currency_list[account_currencyType_choice]]

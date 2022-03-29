@@ -14,9 +14,8 @@ def request(service: ServiceType, *args, **kwargs) -> Union[ReplyMessage, Except
     """
     msg = RequestMessage(service=service, data=args)
     marshalled_msg = msg.marshall()
-    # marshalled_msg = struct.pack('<I', create_validation_code(marshalled_msg)) + marshalled_msg
     print(marshalled_msg)
-    reply_msg = UDPClientSocket.send_msg(msg=marshalled_msg, request_id=msg.request_id, **kwargs)
+    reply_msg = UDPClientSocket.send_msg(msg=marshalled_msg, request_id=msg.request_id)
     return reply_msg
 
 

@@ -1,4 +1,3 @@
-from time import time
 import socket
 from typing import Callable
 import random
@@ -77,7 +76,6 @@ class UDPClientSocket:
         """
         This will listen message from the server for a certain period of time
         :param subscribe_time: time to listen in seconds
-        :param subscription_id: expected id of the message from server
         :param call_back_function: function to execute upon receiving a valid message
         :param buffer_size: maximum size of the expected reply
         :return: 
