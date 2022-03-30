@@ -89,8 +89,9 @@ public class Server {
                         byte[] marshalledUpdateMsg = Marshaller.marshallUpdateMsg(response);
                         DatagramPacket updateMsgReply = new DatagramPacket(marshalledUpdateMsg, marshalledUpdateMsg.length, subscriber.getIpAddress(), subscriber.getPort());
                         aSocket.send(updateMsgReply);
-                                System.out.println("Sent update to " + subscriber.getIpAddress() + ":" + subscriber.getPort());
+                        System.out.println("Sent update to " + subscriber.getIpAddress() + ":" + subscriber.getPort());
                     }
+                    System.out.println();
                 }
             }
         }

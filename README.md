@@ -11,7 +11,19 @@ Instructions go here
 ## Project Structure
 
 ```
-project file and folder structure goes here
+/
+|__ .idea/ (project configuration files, not related to actual project implementation)
+|__ client/ (python client files)
+|     |__ communication/ (manages sending and receiving to and from the server)
+|     |__ configs/ (config files for server/client ip and port)
+|     |__ controllers/ (contains control classes for each service functionality)
+|     |__ utils/ (ultility functions for marshalling and unmarshalling, printing, and receiving user input)
+|     |__ main.py (main program for python server)
+|__ out/ (output of compiled project)
+|__ src/ (java server files)
+|     |__ Bank/ (classes for bank functionality)
+|     |__ utils/ (ultility classes that provide several functions for server and bank)
+|     |__ Server.java (main program for java server)
 ```
 
 ## Bank Account Details
@@ -214,5 +226,3 @@ server start -> create a handler -> handler class creates accountManager class
 - [x] (Idempotent) Check account balance
 - [x] (Non-idempotent) Transfer money
 - [x] Password to be fixed length
-
-
