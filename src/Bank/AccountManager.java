@@ -74,7 +74,7 @@ public class AccountManager {
                 float convertedAmount = CurrencyConverter.convertCurrency(amount, requestCurrency, account.getCurrencyType());
                 float newBalance = account.getBalance() - convertedAmount;
                 if (newBalance >= 0){
-                    account.setBalance(account.getBalance() - amount);
+                    account.setBalance(newBalance);
                     accountsHashMap.put(accountNumber, account);
                     return account.getBalance();
                 }
