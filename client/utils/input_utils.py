@@ -40,8 +40,6 @@ def get_int_input(msg=None) -> int:
     """
     Get an integer within certain range
     :param msg: message to be displayed
-    :param min_val: min possible value (included)
-    :param max_val: max possible value (included)
     :return: user input integer
     """
     while True:

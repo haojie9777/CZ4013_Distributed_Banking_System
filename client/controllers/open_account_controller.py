@@ -60,7 +60,8 @@ class OpenAccountController(BaseController):
         except Exception as e:
             print_error(f'Open account failed: {str(e)}')
 
-    def _check_password_isalnum(self, password: str) -> bool:
+    @staticmethod
+    def _check_password_isalnum(password: str) -> bool:
         """
         This checks if the password is alphanumeric
         :return: boolean
