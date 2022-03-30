@@ -8,7 +8,7 @@ def request(service: ServiceType, *args) -> Union[ReplyMessage, ExceptionMessage
     """
     This will send a request to the server and wait for a reply
     :param service: name of the service
-    :param args: arguments to be passed for the service
+    :param args: tuple data to be sent to server
     :return: Reply message from the server
     """
     msg = RequestMessage(service=service, data=args)
