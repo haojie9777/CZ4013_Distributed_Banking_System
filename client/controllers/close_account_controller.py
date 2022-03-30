@@ -39,7 +39,7 @@ class CloseAccountController(BaseController):
         try:
             print_message("Closing account...")
             account_number = self.close_account(account_name, account_number, account_password)
-            print_message(msg=f'\nYou have successfully closed your account: {account_number}')
+            print_message(msg=f'\nYou have successfully closed account number: {account_number}')
         except Exception as e:
             print_error(f'Close account failed: {str(e)}')
 
