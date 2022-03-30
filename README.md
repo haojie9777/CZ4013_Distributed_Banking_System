@@ -214,3 +214,6 @@ server start -> create a handler -> handler class creates accountManager class
 - [x] (Idempotent) Check account balance
 - [x] (Non-idempotent) Transfer money
 - [x] Password to be fixed length
+
+Remaining TODO: 
+-added 2 dp for all money
