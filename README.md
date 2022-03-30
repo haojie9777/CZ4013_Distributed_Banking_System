@@ -1,12 +1,16 @@
 # CZ4013_Distributed_Banking_System
 
-Banking system project for CZ4013 Distributed Systems. Banking system consist of a banking server and several client instances.
+Banking system project for CZ4013 Distributed Systems. Banking system consist of a java banking server and several python client instances.
 
 # Getting Started
 
 ### Quick Start
 
-Instructions go here
+For client:
+python main.py
+
+Server:
+Run Server.java in Intellij
 
 ## Project Structure
 
@@ -36,7 +40,7 @@ Instructions go here
 
 ## Server Services
 
-For now, we use Ack to return '1' for success, '0' for error, then message to return response or error messages
+For "Status" in response, "0" indicates error, "1" indicates success
 
 ### Open Account (request 0)
 
@@ -186,10 +190,6 @@ Invokes server services
 "usd", "sgd", "rmb"
 
 ## To Do list
-
-### Server (Java)
-
-server start -> create a handler -> handler class creates accountManager class
 
 #### Server Class
 
