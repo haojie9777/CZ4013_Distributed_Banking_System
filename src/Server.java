@@ -2,13 +2,28 @@ import java.net.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 import utils.*;
 public class Server {
 
     public static void main(String[] args) throws IOException {
-        System.out.println("Running IDamNerd Bank's Server...");
+        System.out.println("Welcome to CZ4013 Bank Server!");
+        System.out.println("Please select the invocation semantics to use:");
+        System.out.println("1. At-most-once Semantics");
+        System.out.println("2. At-least-once semantics");
+
+        Scanner input = new Scanner(System.in);
+        String semantics = input.nextLine();
+
+        while (!semantics.equals("1") && !semantics.equals("2")) {
+            System.out.println("Please input either 1 or 2 only!");
+            semantics = input.nextLine();
+        }
+
+        boolean atMostOnce = semantics.equals("1");
+
+        System.out.println("Starting CZ4013 Bank's Server...");
         //ask user for semantics to use: at-least-once or at-most-once
-        boolean atMostOnce = true;
         if (atMostOnce) {
             System.out.println("Server running with at-most-once semantics!");
         }
@@ -17,8 +32,9 @@ public class Server {
         }
 
         System.out.println("---------------------------------------------------");
+        System.out.println();
 
-        float lossRate = (float) 0; //set loss rate for reply to client
+        float lossRate = (float) 0.5; //set loss rate for reply to client
 
 
         DatagramSocket aSocket = new DatagramSocket(6789);
@@ -67,13 +83,13 @@ public class Server {
 
                 //send update to all subscribers
                 if (!unmarshalledRequest.get("requestType").equals("4")
-                        && !unmarshalledRequest.get("requestType").equals("6")) {
+                        && !unmarshalledRequest.get("requestType").equals("6") && response.get("status").equals("1")) {
                     ArrayList<Subscriber> subscribers = handler.retrieveSubscribers();
                     for (Subscriber subscriber : subscribers) {
                         byte[] marshalledUpdateMsg = Marshaller.marshallUpdateMsg(response);
                         DatagramPacket updateMsgReply = new DatagramPacket(marshalledUpdateMsg, marshalledUpdateMsg.length, subscriber.getIpAddress(), subscriber.getPort());
                         aSocket.send(updateMsgReply);
-                        System.out.println("Sent update to " + subscriber.getIpAddress() + ":" + subscriber.getPort());
+                                System.out.println("Sent update to " + subscriber.getIpAddress() + ":" + subscriber.getPort());
                     }
                 }
             }

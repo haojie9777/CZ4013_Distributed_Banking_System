@@ -17,7 +17,7 @@ public class Marshaller {
         HashMap<String, String> request = new HashMap<String, String>();
         switch (requestType) {
             case "0":
-                System.out.println("Marshalling Open Account Request");
+//                System.out.println("Marshalling Open Account Request");
                 request.put("requestType", requestParams[0]);
                 request.put("requestId", requestParams[1]);
                 request.put("accountName", requestParams[2]);
@@ -28,7 +28,7 @@ public class Marshaller {
                 return request;
 
             case "1": {
-                System.out.println("Marshalling Close Account Request");
+//                System.out.println("Marshalling Close Account Request");
                 request.put("requestType", requestParams[0]);
                 request.put("requestId", requestParams[1]);
                 request.put("accountName", requestParams[2]);
@@ -39,7 +39,7 @@ public class Marshaller {
             }
 
             case "2":
-                System.out.println("Marshalling Deposit Money Request");
+//                System.out.println("Marshalling Deposit Money Request");
                 request.put("requestType", requestParams[0]);
                 request.put("requestId", requestParams[1]);
                 request.put("accountName", requestParams[2]);
@@ -51,7 +51,7 @@ public class Marshaller {
                 return request;
 
             case "3":
-                System.out.println("Marshalling Withdraw Money Request");
+//                System.out.println("Marshalling Withdraw Money Request");
                 request.put("requestType", requestParams[0]);
                 request.put("requestId", requestParams[1]);
                 request.put("accountName", requestParams[2]);
@@ -63,7 +63,7 @@ public class Marshaller {
                 return request;
 
             case "4":
-                System.out.println("Marshalling Broadcast Account Update Request");
+//                System.out.println("Marshalling Broadcast Account Update Request");
                 request.put("requestType", requestParams[0]);
                 request.put("requestId", requestParams[1]);
                 request.put("monitorInterval", requestParams[2]);
@@ -71,7 +71,7 @@ public class Marshaller {
                 return request;
 
             case "5":
-                System.out.println("Marshalling Transfer Money Request");
+//                System.out.println("Marshalling Transfer Money Request");
                 request.put("requestType", requestParams[0]);
                 request.put("requestId", requestParams[1]);
                 request.put("accountName", requestParams[2]);
@@ -85,7 +85,7 @@ public class Marshaller {
                 return request;
 
             case "6":
-                System.out.println("Marshalling Check Account Balance Request");
+//                System.out.println("Marshalling Check Account Balance Request");
                 request.put("requestType", requestParams[0]);
                 request.put("requestId", requestParams[1]);
                 request.put("accountName", requestParams[2]);

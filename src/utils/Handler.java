@@ -79,7 +79,7 @@ public class Handler {
                     message = "Wrong account name or password";
                     status = "0";
                 } else {
-                    message = String.valueOf(newBalance);
+                    message = String.format("%.2f", newBalance);
                     reply.put("updateMessage", SubscriptionService.createDepositMoneyMsg(request));
                 }
                 break;
@@ -105,7 +105,7 @@ public class Handler {
                     message = "Insufficient balance in account to withdraw";
                     status = "0";
                 } else {
-                    message = String.valueOf(newBalance);
+                    message = String.format("%.2f", newBalance);
                     reply.put("updateMessage", SubscriptionService.createWithdrawMoneyMsg(request));
                 }
                 break;
@@ -143,7 +143,7 @@ public class Handler {
                     message = "Insufficient balance in account to transfer";
                     status = "0";
                 } else {
-                    message = String.valueOf(newBalance);
+                    message = String.format("%.2f", newBalance);
                     reply.put("updateMessage", SubscriptionService.createTransferMoneyMsg(request));
                 }
                 break;
@@ -162,7 +162,7 @@ public class Handler {
                     message = "Wrong account name or password";
                     status = "0";
                 } else {
-                    message = String.valueOf(balance);
+                    message = String.format("%.2f", balance);
                 }
                 break;
             }

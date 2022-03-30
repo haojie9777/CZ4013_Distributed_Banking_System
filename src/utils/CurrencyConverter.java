@@ -11,6 +11,7 @@ public class CurrencyConverter {
     private static float rmbToUsd = 0.16f;
     private static float rmbToSgd = 0.21f;
 
+    // convert requestCurrency to accountCurrency
     public static float convertCurrency(float amount, Account.Currency requestCurrency, Account.Currency accountCurrency) {
         if (requestCurrency == accountCurrency) {
             return amount;
