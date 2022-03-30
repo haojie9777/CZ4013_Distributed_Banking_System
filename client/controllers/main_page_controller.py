@@ -13,7 +13,7 @@ class MainPageController(BaseController):
 
     @property
     def message(self):
-        return 'Welcome to CZ4013 Bank Client!'
+        return '\nWelcome to CZ4013 Bank Client!'
 
     @property
     def options(self):

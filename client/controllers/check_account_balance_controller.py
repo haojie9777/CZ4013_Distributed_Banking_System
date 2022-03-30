@@ -13,7 +13,7 @@ class CheckAccountBalanceController(BaseController):
 
     @property
     def message(self):
-        return 'Lets take a look at your balance:'
+        return '\nLets take a look at your balance:'
 
     @property
     def options(self):

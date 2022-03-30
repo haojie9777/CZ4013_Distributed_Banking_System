@@ -22,7 +22,7 @@ class DepositMoneyController(BaseController):
 
     @property
     def message(self):
-        return 'We welcome your money! Please provide more details:'
+        return '\nWe welcome your money! Please provide more details:'
 
     @property
     def options(self):

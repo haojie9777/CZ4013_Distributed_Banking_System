@@ -22,7 +22,7 @@ class WithdrawMoneyController(BaseController):
 
     @property
     def message(self):
-        return 'We hate to see your money leave! Please provide more details:'
+        return '\nWe hate to see your money leave! Please provide more details:'
 
     @property
     def options(self):

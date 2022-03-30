@@ -23,7 +23,7 @@ class OpenAccountController(BaseController):
 
     @property
     def message(self):
-        return 'Thanks for signing up with our bank! Please proceed to provide your details:'
+        return '\nThanks for signing up with our bank! Please proceed to provide your details:'
 
     @property
     def options(self):

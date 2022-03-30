@@ -14,7 +14,7 @@ class SubscribeUpdatesController(BaseController):
 
     @property
     def message(self):
-        return 'Wanna hear about whats going on in our bank? Please provide your details:'
+        return '\nWanna hear about whats going on in our bank? Please provide your details:'
 
     @property
     def options(self):

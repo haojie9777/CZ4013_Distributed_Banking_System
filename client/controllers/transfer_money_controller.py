@@ -23,7 +23,7 @@ class TransferMoneyController(BaseController):
 
     @property
     def message(self):
-        return 'Making sure your money goes to your recipient! Please provide more details:'
+        return '\nMaking sure your money goes to your recipient! Please provide more details:'
 
     @property
     def options(self):

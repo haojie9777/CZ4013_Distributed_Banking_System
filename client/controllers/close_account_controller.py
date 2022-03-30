@@ -14,7 +14,7 @@ class CloseAccountController(BaseController):
 
     @property
     def message(self):
-        return 'We are sad to see you go, please input your details:'
+        return '\nWe are sad to see you go, please input your details:'
 
     @property
     def options(self):
