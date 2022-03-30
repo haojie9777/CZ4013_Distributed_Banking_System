@@ -1,4 +1,4 @@
-from utils import prompt_message_decorator, print_warning
+from utils import input_message_format, print_warning
 
 
 def get_menu_option(max_choice, msg='Please Indicate Your Choice') -> int:
@@ -9,7 +9,7 @@ def get_menu_option(max_choice, msg='Please Indicate Your Choice') -> int:
     :return: a user chosen index
     """
     while True:
-        user_input = input(prompt_message_decorator(msg))
+        user_input = input(input_message_format(msg))
         try:
             idx = int(user_input)
             if not (1 <= idx <= max_choice):
@@ -27,7 +27,7 @@ def get_string_input(msg=None) -> str:
     """
     while True:
         try:
-            user_input = input(prompt_message_decorator(msg)).strip()
+            user_input = input(input_message_format(msg)).strip()
             if len(user_input) != 0:
                 return user_input
             else:
@@ -45,7 +45,7 @@ def get_int_input(msg=None) -> int:
     :return: user input integer
     """
     while True:
-        user_input = input(prompt_message_decorator(msg))
+        user_input = input(input_message_format(msg))
         try:
             idx = int(user_input)
             return idx
@@ -60,7 +60,7 @@ def get_float_input(msg=None) -> float:
     :return: user input integer
     """
     while True:
-        user_input = input(prompt_message_decorator(msg))
+        user_input = input(input_message_format(msg))
         try:
             val = float(user_input)
             return val
