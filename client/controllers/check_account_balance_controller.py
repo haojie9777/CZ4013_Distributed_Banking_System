@@ -38,7 +38,7 @@ class CheckAccountBalanceController(BaseController):
         print_message(f'Checking account balance...')
         try:
             current_balance = self.retrieve_account_balance(account_name, account_number, account_password)
-            print_message(msg=f'\nYour current balance is: {current_balance}')
+            print_message(msg=f'\nYour current balance is: ${current_balance}')
         except Exception as e:
             print_error(f"Bad request detected! {str(e)}")
 

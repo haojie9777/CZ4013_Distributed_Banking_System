@@ -21,7 +21,7 @@ class ServiceType(Enum):
 
 class BaseMessage:
     """
-    Super class for all kinds of messages expected from the server
+    Super class for all messages expected from the server
     """
 
     def __init__(self, request_id: str):
@@ -30,7 +30,7 @@ class BaseMessage:
 
 class RequestMessage(BaseMessage):
     """
-    UDP message of type Request
+    UDP message of type REQUEST
     """
 
     def __init__(self, service: ServiceType, data: Tuple):
@@ -88,4 +88,4 @@ def unmarshall(data: bytes) -> Union[ReplyMessage, ExceptionMessage]:
     elif message_status == '1':
         return ReplyMessage(request_id=request_id, data=decoded_data_list[2])
     else:
-        raise TypeError(f"Unexpected Message Of Type {message_status} Received!")
+        raise Exception(f"Unexpected Message Of Type {message_status} Received!")

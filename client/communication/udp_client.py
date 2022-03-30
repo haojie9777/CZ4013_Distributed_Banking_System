@@ -86,6 +86,6 @@ class UDPClientSocket:
                 else:
                     print_warning(f'Unexpected message from {addr} detected! Discarding...')
 
-        except (socket.timeout, ValueError, KeyboardInterrupt):
+        except (socket.timeout, KeyboardInterrupt):
             print_message("\nYour subscription has expired. Thanks for listening!")
             return

@@ -56,7 +56,7 @@ class WithdrawMoneyController(BaseController):
             print_message("Withdrawing money...")
             current_balance = self.withdraw_money(account_name, account_number, account_password, account_currencyType,
                                                   withdraw_amount)
-            print_message(msg=f'\nYou have successfully withdrawn, your new balance is: {current_balance}')
+            print_message(msg=f'\nYou have successfully withdrawn, your new balance is: ${current_balance}')
         except Exception as e:
             print_error(f'Withdraw money failed: {str(e)}')
 
