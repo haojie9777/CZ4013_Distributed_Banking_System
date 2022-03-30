@@ -48,7 +48,7 @@ class TransferMoneyController(BaseController):
     def handler(self, account_name: str, account_number: int, account_password: str, account_currencyType: CurrencyType,
                 transfer_amount: float, payee_account_name: str, payee_account_number: int):
         """
-        This handles the input from the client by logging hint information and make requests to the server
+        This takes user input and makes request to the server for transferring money, printing out the reply
         :param transfer_amount: float amount to transfer to payee
         :param payee_account_number: account number of payee
         :param payee_account_name: account name of payee

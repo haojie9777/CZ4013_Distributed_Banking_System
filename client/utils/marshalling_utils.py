@@ -6,7 +6,6 @@ from uuid import uuid4 as uuid
 class MessageType(Enum):
     REQUEST = "REQUEST"
     REPLY = "REPLY"
-    ACK = "ACK"
     EXCEPTION = "EXCEPTION"
 
 
@@ -36,6 +35,7 @@ class RequestMessage(BaseMessage):
 
     def __init__(self, service: ServiceType, data: Tuple):
         super().__init__(str(uuid()))
+        self.msg_type = MessageType.REQUEST
         self.service = service
         self.data = data
 
@@ -75,28 +75,17 @@ class ExceptionMessage(BaseMessage):
 
 def unmarshall(data: bytes) -> Union[ReplyMessage, ExceptionMessage]:
     """
-    Unmarshall a message in bytes to one of the predefined UDP mesage types
+    Unmarshall a message in bytes to one of the predefined UDP message types
     :param data: raw data in bytes
     :return: A UDP message of type REPLY or EXCEPTION
     """
     decoded_data = data.decode('ascii')
     decoded_data_list = decoded_data.split('|')
-    print(decoded_data_list)
     request_id = decoded_data_list[0]
-    print(request_id)
     message_status = decoded_data_list[1]
-    print(message_status)
     if message_status == '0':
         return ExceptionMessage(request_id=request_id, error_msg=decoded_data_list[2])
     elif message_status == '1':
         return ReplyMessage(request_id=request_id, data=decoded_data_list[2])
     else:
         raise TypeError(f"Unexpected Message Of Type {message_status} Received!")
-
-
-if __name__ == '__main__':
-    msg = RequestMessage(service=ServiceType.FACILITY_AVAIL_CHECKING, data=('North Hill Gym', ['Sun', 'Coming Mon']))
-    bytes_msg = msg.marshall()
-    from communication import UDPClientSocket
-
-    UDPClientSocket.send_msg(msg=bytes_msg, request_id=msg.request_id)

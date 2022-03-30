@@ -30,7 +30,7 @@ class CloseAccountController(BaseController):
 
     def handler(self, account_name: str, account_number: int, account_password: str):
         """
-        This handles the input from the users by logging hint information and make requests to the server
+        This takes user input and makes request to the server to close account, printing out the reply
         :param account_number: account number of client
         :param account_password:account password of client
         :param account_name: account name of client

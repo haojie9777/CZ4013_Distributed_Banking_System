@@ -22,7 +22,7 @@ class BaseController(ABC):
 
     def show_options(self):
         """
-        print the list of options on screen for the user to choose
+        Print the list of options on screen for the user to choose
         :return:
         """
         print_options(self.options)

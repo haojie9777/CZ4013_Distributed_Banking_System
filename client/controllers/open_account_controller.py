@@ -44,7 +44,7 @@ class OpenAccountController(BaseController):
     def handler(self, account_name: str, account_password: str, account_currencyType: CurrencyType,
                 account_balance: float):
         """
-        This handles the input from the users by logging hint information and make requests to the server
+        This takes user input and makes request to the server for opening account, printing out the reply
         :param account_balance: starting balance in client account
         :param account_currencyType: currency type of client account
         :param account_password: password to set for client account

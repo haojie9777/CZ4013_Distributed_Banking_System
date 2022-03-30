@@ -28,14 +28,14 @@ class SubscribeUpdatesController(BaseController):
 
     def handler(self, monitor_interval: int) -> None:
         """
-        This handles the input from the users by logging hint information, make requests to the server
+        This takes user input and makes request to the server for subscribing, printing out the updates
         for subscription, and starts the blocking listening.
         :param monitor_interval: amount of time to receive updates for
         :return:
         """
         print_message(f'Subscribing to all bank events...')
         try:
-            subscription_id = self.request_to_subscription(monitor_interval=monitor_interval)
+            reply = self.request_to_subscription(monitor_interval=monitor_interval)
             print_message(f'\nYou have successfully subscribed to events!')
             print_message(f'If you would like to unsubscribe: Press {inline_important_message_decorator("Ctrl + C")} ')
             try:
@@ -58,10 +58,9 @@ class SubscribeUpdatesController(BaseController):
         return reply_msg.data
 
     @classmethod
-    def display_events(cls, msg: Union[RequestMessage, ExceptionMessage]):
+    def display_events(cls, msg: Union[ReplyMessage, ExceptionMessage]):
         """
-        This is the callback method on received of the server events. It prints out the event
-        and sends ACK to the server
+        This is the callback method on received of the server events. It prints out the event.
         :param msg: event message received from the server
         :return:
         """

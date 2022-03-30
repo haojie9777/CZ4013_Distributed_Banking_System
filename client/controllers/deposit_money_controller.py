@@ -44,7 +44,7 @@ class DepositMoneyController(BaseController):
     def handler(self, account_name: str, account_number: int, account_password: str, account_currencyType: CurrencyType,
                 deposit_amount: float):
         """
-        This handles the input from the users by logging hint information and make requests to the server
+        This takes user input and makes request to the server for depositing money, printing out the reply
         :param deposit_amount: amount to deposit into client account
         :param account_currencyType: currency type of money to deposit into client account
         :param account_number: account number of client

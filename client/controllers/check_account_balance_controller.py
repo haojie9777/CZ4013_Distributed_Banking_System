@@ -2,12 +2,6 @@ from controllers import BaseController
 from communication import *
 
 
-class CurrencyType(Enum):
-    SGD = "SGD"
-    USD = "USD"
-    RMB = "RMB"
-
-
 class CheckAccountBalanceController(BaseController):
     """
     This is the controller used to check account balance
@@ -15,10 +9,7 @@ class CheckAccountBalanceController(BaseController):
 
     def __init__(self):
         super().__init__()
-        self.currency_list = []
         self.ctrl_list = ['Back to homepage', 'Check balance again']
-        for currency in CurrencyType:
-            self.currency_list.append(currency.name)
 
     @property
     def message(self):
@@ -26,7 +17,7 @@ class CheckAccountBalanceController(BaseController):
 
     @property
     def options(self):
-        return self.currency_list
+        return None
 
     def execute(self) -> int:
         account_name = get_string_input(f'Please indicate name')
@@ -38,8 +29,7 @@ class CheckAccountBalanceController(BaseController):
 
     def handler(self, account_name: str, account_number: int, account_password: str):
         """
-        This handles the input from the users by logging hint information and makes request to the server for
-        the checking account balance
+        This takes user input and makes request to the server for checking account balance, printing out the reply
         :param account_number: account number of client
         :param account_name: account name of client
         :param account_password: account password of client

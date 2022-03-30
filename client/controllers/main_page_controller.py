@@ -13,7 +13,7 @@ class MainPageController(BaseController):
 
     @property
     def message(self):
-        return 'Welcome to iDamnNerd Bank!'
+        return 'Welcome to CZ4013 Bank Client!'
 
     @property
     def options(self):
@@ -61,5 +61,5 @@ class MainPageController(BaseController):
         Terminate the program
         :return:
         """
-        print_message("Thank You for Using iDamnNerdBank.")
+        print_message("Thank you for using our banking client, we hope to see you again.")
         sys.exit()

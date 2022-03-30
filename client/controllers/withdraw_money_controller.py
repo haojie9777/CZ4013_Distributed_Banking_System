@@ -44,7 +44,7 @@ class WithdrawMoneyController(BaseController):
     def handler(self, account_name: str, account_number: int, account_password: str, account_currencyType: CurrencyType,
                 withdraw_amount: float):
         """
-        This handles the input from the users by logging hint information and make requests to the server
+        This takes user input and makes request to the server for withdrawing money, printing out the reply
         :param withdraw_amount: amount of money to withdraw from client account
         :param account_currencyType: currency type of money
         :param account_number: account number of client

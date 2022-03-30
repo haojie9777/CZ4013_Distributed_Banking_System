@@ -15,7 +15,7 @@ class Colors:
 
 def print_options(opts: List[str]) -> None:
     """
-    Print a list of options to console
+    Print a list of options
     :param opts: list of options
     :return:
     """
