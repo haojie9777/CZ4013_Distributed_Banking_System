@@ -50,7 +50,7 @@ def print_error(msg: str) -> None:
     print(f"{Colors.FAIL}{msg}{Colors.ENDC}")
 
 
-def prompt_message_decorator(msg: str) -> str:
+def input_message_format(msg: str) -> str:
     """
     Add a blue '>' before the message
     :param msg: message to be printed

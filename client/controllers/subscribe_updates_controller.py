@@ -37,7 +37,7 @@ class SubscribeUpdatesController(BaseController):
         try:
             reply = self.request_to_subscription(monitor_interval=monitor_interval)
             print_message(f'\nYou have successfully subscribed to events!')
-            print_message(f'If you would like to unsubscribe: Press {inline_important_message_decorator("Ctrl + C")} ')
+            print_message('If you would like to unsubscribe: Please exit the client program')
             try:
                 listen(func=self.display_events, subscribe_time=monitor_interval)
             except KeyboardInterrupt:
